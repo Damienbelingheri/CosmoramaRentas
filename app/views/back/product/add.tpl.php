@@ -3,6 +3,8 @@
     <h2 class="action__title">agregar un producto</h2>
 
     <?php dump($_SESSION)?>
+    <?php dump($errorsPicture)?>
+    <?php dump($messageValidation)?>
 
     <form action="" method="POST" enctype='multipart/form-data' class="mt-5 form">
         <div class="form-group">

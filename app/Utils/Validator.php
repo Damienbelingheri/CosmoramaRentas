@@ -38,13 +38,14 @@ class Validator
         // allow valid image file formats
         if (in_array($imgExt, $valid_extensions)) {
             // Check file size '5MB'
-            if ($imgSize < 5000000) {
+            // 
+            if ($imgSize < 2000000) {
                 //Setup our new file path
                 $upload_dir = __DIR__ . '/../../public/assets/img/productos/' . $pic; // upload directory
                 move_uploaded_file($tmp_dir, $upload_dir);
                 return $pic;
             } else {
-              $this->setErrors("Sorry, your file is too large.");
+              $this->setErrors("Sorry, your file is too large it should be less then 2MB");
             }
         } else {
             $this->setErrors("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");

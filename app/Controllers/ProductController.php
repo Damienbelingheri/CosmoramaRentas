@@ -52,7 +52,6 @@ class ProductController extends CoreController
                 $subCategoryId = strip_tags(filter_input(INPUT_POST, 'subCategory_id'));
             }
 
-
             $product = new Product();
             $validator = new Validator;
 
@@ -61,19 +60,28 @@ class ProductController extends CoreController
             $tmp_dir = $_FILES['image']['tmp_name'];
             $imgSize = $_FILES['image']['size'];
             if (!empty($imgFile)) {
-                if ($uploadedPic = $validator->uploadPicture($imgFile, $tmp_dir, $imgSize)) {
-                };
+                if (!is_null($uploadedPic = $validator->uploadPicture($imgFile, $tmp_dir, $imgSize))) {
+                    $product->setImage($uploadedPic);
+                }
             } else {
-                $validationImage = new Validator();
-                $validationImage->setErrors("Imagen requerida??");
+                $validator->setErrors("Image requiered ");
             }
 
-            //VALIDATION
+            $product->setName($name);
+            $product->setDescription($description);
+            $product->setInclude($include);
+            $product->setVideo($video);
+            $product->setStatus($status);
+            $product->setPrice($price);
+            $product->setCategory_id($categoryId);
+            $product->setSubCategory_id($subCategoryId);
+            $product->setSlug($slug);
 
+            //VALIDATION
             //FROM RESPECT/VALIDATION
             $maxCategory = Category::findMaxId('category')['max_id'];
             $maxSubCategory = Category::findMaxId('subcategory')['max_id'];
-           
+
             $userValidator = v::attribute('name', v::notEmpty()->length(3, null))
                 ->attribute('description', v::notEmpty())
                 ->attribute('include', v::notEmpty())
@@ -89,33 +97,23 @@ class ProductController extends CoreController
             } catch (NestedValidationException $ex) {
 
                 $coll = collect($ex->getMessages());
-                dump($coll);
+                //dump($coll);
 
                 $messages = $coll->flatten();
-
+                dump($messages);
                 foreach ($coll as $key => $message)
                     $errorList["'$key'"] = $message;
             }
 
-            $errorsInUploadPicture = $validator->getErrors();
-
-            if (empty($messages) || empty($errorInvalidator)) {
-
-                $product->setName($name);
-                $product->setDescription($description);
-                $product->setInclude($include);
-                $product->setVideo($video);
-                $product->setStatus($status);
-                $product->setPrice($price);
-                $product->setCategory_id($categoryId);
-                $product->setSubCategory_id($subCategoryId);
-                $product->setSlug($slug);
-                $product->setImage($uploadedPic);
+          
 
 
+            if (isset($_POST['imagesWithId[]']) && empty($messages) && empty($errorsInUploadPicture)) {
                 //recupère le lastInsertId et le stock dans une variable
                 //qu'on utilise pour comme product_id  
                 if ($lastId = $product->insert()) {
+                    $erroList['success'] = "Your product has been added";
+                    dump("coucou après insert");
                     $total = count($_FILES['imagesWithId']['name']);
                     // Loop through each file
                     for ($i = 0; $i < $total; $i++) {
@@ -123,48 +121,35 @@ class ProductController extends CoreController
                         $tmp_dir = $_FILES['imagesWithId']['tmp_name'][$i];
                         $imgSize = $_FILES['imagesWithId']['size'][$i];
 
-                        if (v::extension('png')->validate($imgFile) || v::extension('jpg')->validate($imgFile) || v::extension('gif')->validate($imgFile)) {
-                            $uploadedPic = Validator::uploadPicture($imgFile, $tmp_dir, $imgSize);
-                        }
-
-                        // Ajout BDD
                         $pictures = new Product;
-                        $pictures->setPicture($uploadedPic);
-                        $pictures->setProduct_id($lastId);
-
-                        $userValidator = v::attribute('product_id', v::notEmpty()->number());
-                        try {
-                            $userValidator->assert($pictures);
-                        } catch (NestedValidationException $ex) {
-
-                            $coll = collect($ex->getMessages());
-
-                            $messages = $coll->flatten();
-
-                            foreach ($messages as $message) {
-                                $_SESSION['alert'] = $message;
-                            }
+                        if (!is_null($uploadedPic = $validator->uploadPicture($imgFile, $tmp_dir, $imgSize))) {
+                            $pictures->setPicture($uploadedPic);
+                            $pictures->setProduct_id($lastId);
                         }
-                        if (empty($messages)) {
-                            if ($pictures->insertInPicture()) {
-                                $_SESSION['succes'] = "Tu producto ha sido agregado!";
-                            }
-                        };
+
+                        if ($pictures->insertInPicture()) {
+                            $erroList['success'] = "Aditionals pictures have been added";
+                        }
                     }
                 }
             }
         }
+
+        //recupère les erreurs dans la fonction $uploadedPic
+        $errorsInUploadPicture = $validator->getErrors();
         //permet de definir le statut
         $status = Product::status();
         //on passe ce tableau de résultats à la vue
-        $this->show('back/product/add',
-         ["allCategories" => Category::findAll(),
-          "status" => $status,
-           "errorsPicture" => ($errorsInUploadPicture),
-          "messageValidation" => ($coll), 
-          ]);
+        $this->show(
+            'back/product/add',
+            [
+                "allCategories" => Category::findAll(),
+                "status" => $status,
+                "errorsPicture" => $errorsInUploadPicture,
+                "messageValidation" => $errorList
+            ]
+        );
     }
-
 
     /**
      * Update a Product
@@ -203,9 +188,7 @@ class ProductController extends CoreController
             $product->setName($name);
             $product->setDescription($description);
             $product->setInclude($include);
-
             $product->setImage($updatedImg);
-
             $product->setVideo($video);
             $product->setStatus($status);
             $product->setPrice($price);

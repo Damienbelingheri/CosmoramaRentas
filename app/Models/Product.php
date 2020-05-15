@@ -199,6 +199,7 @@ class Product extends CoreModel {
                 updated_at = NOW()
             WHERE id = :id
         ";
+        
         $stmt=$pdo->prepare($sql);
         $updatedRows = $stmt->execute([
             ":name" => $this->name,
@@ -312,7 +313,7 @@ class Product extends CoreModel {
      *
      * @return  self
      */ 
-    public function setName(string $name)
+    public function setName($name)
     {
         $this->name = $name;
 
@@ -336,7 +337,7 @@ class Product extends CoreModel {
      *
      * @return  self
      */ 
-    public function setPicture(string $picture)
+    public function setPicture($picture)
     {
         $this->picture = $picture;
 
@@ -384,7 +385,7 @@ class Product extends CoreModel {
      *
      * @return  self
      */ 
-    public function setCategory_id(int $category_id)
+    public function setCategory_id($category_id)
     {
         $this->category_id = $category_id;
 
@@ -408,7 +409,7 @@ class Product extends CoreModel {
      *
      * @return  self
      */ 
-    public function setStatus(int $status)
+    public function setStatus($status)
     {
         $this->status = $status;
 
@@ -432,7 +433,7 @@ class Product extends CoreModel {
      *
      * @return  self
      */ 
-    public function setPrice(int $price)
+    public function setPrice( $price)
     {
         $this->price = $price;
 
@@ -457,7 +458,7 @@ class Product extends CoreModel {
      *
      * @return  self
      */ 
-    public function setInclude(string $include)
+    public function setInclude($include)
     {
         $this->include = $include;
 
@@ -481,7 +482,7 @@ class Product extends CoreModel {
      *
      * @return  self
      */ 
-    public function setImage(string $image)
+    public function setImage( $image)
     {
         $this->image = $image;
 
@@ -529,7 +530,7 @@ class Product extends CoreModel {
      *
      * @return  self
      */ 
-    public function setVideo(string $video)
+    public function setVideo( $video)
     {
         $this->video = $video;
 
@@ -553,7 +554,7 @@ class Product extends CoreModel {
      *
      * @return  self
      */ 
-    public function setSlug(string $slug)
+    public function setSlug($slug)
     {
         $this->slug = $slug;
 
@@ -579,7 +580,7 @@ class Product extends CoreModel {
      *
      * @return  self
      */ 
-    public function setSubCategory_id(int $subCategory_id)
+    public function setSubCategory_id($subCategory_id)
     {
         $this->subCategory_id = $subCategory_id;
 
