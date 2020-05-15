@@ -1,0 +1,283 @@
+body {
+    width: 100%;
+
+    margin: auto;
+
+    font-family: 'Myriad', monospace;
+    color: #333333;
+    background-color: #ffED4D;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+
+.navbar {
+    background-color: #ff6712;
+    justify-content: center;
+    font-size: x-large;
+    height: 5rem;
+}
+
+.nav-item {
+    text-transform: capitalize;
+}
+
+.fixed-top {
+    width: 80%;
+    margin: auto;
+}
+
+.nav-admin {
+    position: relative;
+}
+
+/* Modal */
+
+.close {
+    text-align: end;
+    margin-top: 12px;
+    margin-right: 12px;
+}
+
+.contact__logo {
+    width: 70%;
+}
+
+.contact__form {
+    width: 60%;
+    margin: auto;
+}
+
+#inputNombre {
+    border: 3px solid #ffED4D;
+}
+
+#inputMail {
+    border: 3px solid #FF6712;
+}
+
+#inputMessage {
+    border: 3px solid #FF4040;
+}
+
+.contact__items {
+    display: flex;
+    justify-content: space-around;
+    font-size: initial;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.contact__items div {
+    width: 33%;
+}
+
+/* !Modal */
+
+
+/* Product List by Category/subCategory */
+
+.subCategory__container {}
+
+.subCategory__title {
+    font-size: 4rem;
+    margin-bottom: 3.2rem;
+    text-align: center;
+}
+
+.content_list {
+    background: #EAEAEA;
+    padding-top: 3rem;
+}
+
+.name__camera {
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.list_product__picture {
+    position: relative;
+    width: 100%;
+}
+
+.list_product__picture .image {
+    display: inline;
+    width: 100%;
+    padding: 0rem 1rem;
+
+}
+
+/* !Product List by Category/subCategory */
+
+
+
+.product {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+
+.home__header {
+    display: flex;
+}
+
+.cont__logo {
+    background-color: #ff6712;
+    margin-bottom: -6rem;
+    border-bottom-width: 7px;
+    border-bottom-style: solid;
+}
+
+#logo {
+    padding: auto;
+    margin: auto;
+    width: 65%;
+    ;
+}
+
+.right {
+
+    background-color: #ff9900;
+    border-left: 1px black solid;
+}
+
+.left {
+    background-color: #ff9900;
+
+
+}
+
+.left,
+.right {
+    text-align: center;
+
+    padding: 3.5rem 0.8rem;
+
+}
+
+.left h2,
+.right h2 {
+    margin-bottom: 5rem;
+}
+
+.container {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+
+
+footer.footer {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+
+}
+
+
+
+.footer .container {
+    padding-bottom: 0;
+}
+
+
+.mb-5,
+.my-5 {
+    margin-bottom: 0rem !important;
+    margin-top: 15px;
+}
+
+
+.desc_inclu {
+    display: flex;
+}
+
+.desc,
+.incl {
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+label {
+
+    text-align: center;
+    font-size: x-large;
+}
+
+
+.images {
+    display: flex;
+    flex-direction: column;
+}
+
+.img-rounded {
+    height: 300px;
+    margin: 0.5rem 0;
+}
+
+.container-gallery {
+    display: flex;
+    margin: 2rem 0;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+.action__title {
+    text-align: center;
+}
+
+.form {
+    width: 80%;
+    margin: auto;
+}
+
+.table {
+    margin: 1Orem 0;
+}
+
+.list__picture {
+    height: 10rem;
+}
+
+.list__title {
+    text-align: center;
+    margin: 3rem 0
+}
+
+.list__thead {
+    text-align: center;
+}
+
+.list__tbody {
+
+    text-align: center;
+}
+
+.list__tbody tr th,
+.list__tbody tr td {
+    vertical-align: middle;
+}
+
+/* Login */
+
+.cont-login {
+    height: 100vh;
+}
+
+.
+
+/* !Login */

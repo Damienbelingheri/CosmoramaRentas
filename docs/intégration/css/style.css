@@ -1,0 +1,95 @@
+
+.nav-item{
+    text-transform: uppercase;
+}
+
+.fixed-top{
+    width: 100%;
+    margin: auto;
+    background-color:#E0D7C6;
+
+}
+
+.name__camera {
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.product {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+
+.home__header {
+    display: flex;
+}
+
+
+#logo {
+    padding: auto;
+    margin: auto;
+    width: 80%;
+}
+
+.right {
+
+    background-color: #ff9900;
+    border-left: 1px black solid;
+}
+
+.left {
+    background-color: #ff9900;
+
+
+}
+
+.left,
+.right {
+    text-align: center;
+
+    padding: 3.5rem 0.8rem;
+
+}
+
+.left h2,
+.right h2 {
+    margin-bottom: 5rem;
+}
+
+.container {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+
+
+footer.footer {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+
+}
+
+.row {}
+
+.footer .container {
+    padding-bottom: 0;
+}
+
+
+.mb-5,
+.my-5 {
+    margin-bottom: 0rem !important;
+    margin-top: 15px;
+}
+
+
+
+
+
+
+
+
+
