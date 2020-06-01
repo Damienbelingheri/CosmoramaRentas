@@ -14,6 +14,7 @@ session_start();
 
 
 
+
 /* ------------
 --- ROUTAGE ---
 -------------*/
@@ -68,7 +69,7 @@ $router->map('GET','/product/[i:id]','ProductController@showProduct', 'main-prod
 
 
 
-                            /* BACKOFFICE */
+                              /* BACKOFFICE */
 //home backoffice
 $router->map('GET', '/admin', 'UserController#adminHome', 'admin-home');
 //login 
@@ -77,6 +78,9 @@ $router->map('GET|POST', '/admin/login', 'UserController#login', 'admin-user-log
 $router->map('GET|POST', '/logout', 'UserController#logout', 'admin-user-logout');
 //user-list
 $router->map('GET', '/admin/user/list', 'UserController#list', 'admin-user-list');
+
+//user-add
+$router->map('GET|POST', '/admin/user/add', 'UserController#add', 'admin-user-add');
 
 
 
@@ -90,21 +94,16 @@ $router->map('GET|POST','/admin/product/add', 'ProductController#add', 'admin-pr
 $router->map('GET|POST', '/admin/product/update/[i:id]', 'ProductController#update', 'admin-product-update');
 
 
-// delete additionals images of an product 
+// delete additionals images
 $router->map('GET|POST', '/delete/imageAddi/[i:id]', 'ProductController#deleteImageAddi', 'delete-imageAddi');
 
 
                                             /* API */
                                         
 $router->map('GET|POST', '/api/sub_category', 'ApiController#apiSubcategories', 'api-subcategories');
-        
 
-
-
-
-$router->map('GET|POST', '/essai', 'ProductController#essai', 'essai');
-
-
+//TODO changer le controller 
+$router->map('GET|POST', '/sendmail', 'ApiController#sendMail', 'sendMail');
 /* -------------
 --- DISPATCH ---
 --------------*/

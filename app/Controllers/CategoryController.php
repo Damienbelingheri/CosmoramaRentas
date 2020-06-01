@@ -10,7 +10,6 @@ use App\Models\SubCategory;
 class CategoryController extends CoreController
 {
 
-
     
     public function showCategory($id)
     {

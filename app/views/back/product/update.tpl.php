@@ -1,6 +1,19 @@
     <a href="<? /* $router->generate('product-list')  */ ?>" class="btn btn-success float-right">Retour</a>
     <h2 class="action__title">Actualizar un producto</h2>
 
+
+
+    <?php if (!empty($errorList) || is_null($errorsPicture)) : ?>
+    <div class="alert alert-danger text-center font-weight-bold">The product could not be updated</div>
+<?php endif; ?>
+
+<?php if (!empty($successList)) : ?>
+    <?php foreach($successList as $success) : ?>
+    <div class="alert alert-success text-center font-weight-bold"><?= $success ?> </div>
+    <?php endforeach ?>
+<?php endif; ?>
+ 
+
     <form action="" method="POST" enctype='multipart/form-data' class="mt-5 form">
         <div class="form-group">
             <label for="name">Nombre del producto</label>

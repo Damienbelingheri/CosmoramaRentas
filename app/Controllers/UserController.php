@@ -2,18 +2,15 @@
 
 namespace App\Controllers;
 
-
 use App\Models\AppUser;
 use App\Models\Category;
 use App\Models\Product;
 use IntlChar;
+use Respect\Validation\Exceptions\NestedValidationException;
 use Respect\Validation\Validator as v;
 
 class UserController extends CoreController
 {
-
-
-
 
     /**
      * Méthode s'occupant de la page d'accueil du backoffice
@@ -28,8 +25,6 @@ class UserController extends CoreController
             "mainProducts" => Product::findAll()
         ]);
     }
-
-
 
     /**
      * method for login
@@ -74,11 +69,8 @@ class UserController extends CoreController
             }
         }
 
-
-
         $this->show('back/user/login', ["errorsList" => $errorsList, "goodList" => $goodList, 'temoin' => true]);
     }
-
 
 
 
@@ -89,7 +81,6 @@ class UserController extends CoreController
      */
     public function logout()
     {
-
         unset($_SESSION['userConnected']);
         $this->redirectToRoute("main-home");
     }
@@ -110,9 +101,6 @@ class UserController extends CoreController
     }
 
 
-
-
-
     /**
      * method for add user
      * Only admin
@@ -121,10 +109,9 @@ class UserController extends CoreController
      */
     public function add()
     {
-
-
         //contient les messages d'erreur de validation
         $errorsList = [];
+        $succesList = [];
 
         //si c'est soumis, on traite le form...
         if (!empty($_POST)) {
@@ -133,65 +120,79 @@ class UserController extends CoreController
 
             //récupère nos données
             $email = trim(strip_tags(filter_input(INPUT_POST, 'email')));
+            $emailToConfront = filter_input(INPUT_POST, 'emailToConfront');
             $password = filter_input(INPUT_POST, 'password');
+            $passwordToConfront = filter_input(INPUT_POST, 'passwordToConfront');
             $username = strip_tags(filter_input(INPUT_POST, 'username'));
-            $role = strip_tags(filter_input(INPUT_POST, 'role'));
-            $status = strip_tags(filter_input(INPUT_POST, 'status'));
+            //$role = strip_tags(filter_input(INPUT_POST, 'role'));
+            //$status = strip_tags(filter_input(INPUT_POST, 'status'));
 
-            //email requis
-            if (empty($email)) {
-                $errorsList['email'] = "Veuillez renseigner l'email !";
+
+
+            //     elseif (preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/",$password)) {
+            //        $errorsList['password'] = "la forma de tu contraseña es incorecta ! ";
+            //    }
+
+            if ($emailToConfront === $email) {
+                $email;
+            } else {
+                $errorsList["email"] = "emails ne correspondent pas ";
             }
-            //est-ce que l'email est valide ? 
-            elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errorsList['email'] = "L'email n'est pas valide dude !";
+
+            if ($passwordToConfront === $password) {
+
+                $password = password_hash($password, PASSWORD_DEFAULT);
+            } else {
+
+                $errorsList["password"] = "Mot de passe ne correspondent pas ";
+            }
+            dump('coucou', $username, $password, $errorsList);
+            //instancie notre class
+            $user = new AppUser();
+
+            $user->setPassword($password);
+
+            //hydrate l'instance
+            $user->setEmail($email);
+            $user->setUsername($username);
+            //$user->setRole($role);
+            //$user->setStatus($status);
+
+
+            $userValidator = v::attribute('password', v::notEmpty()->regex("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/")
+                ->attribute('email', v::notEmpty()->email()))
+                ->attribute('username', v::notEmpty())->length(3, null);
+
+
+            try {
+                $userValidator->assert($user);
+            } catch (NestedValidationException $ex) {
+                $coll = collect($ex->getMessages());
+
+                $messages = $coll->flatten();
+
+                foreach ($coll as $key => $message)
+                    $errorList["$key"] = $message;
             }
 
-            //mot de passe vide ? 
-            if (empty($password)) {
-                $errorsList['password'] = "Veuillez renseigner un mot de passe !";
-            }
-            //longueur d'au moins 8 caractères
-            //from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
-            // "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/"
 
-            elseif (preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/",$password)) {
-                $errorsList['password'] = "la forma de tu contraseña es incorecta ! ";
-            }
-           
-
-            //tiré de https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
-            // "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/"
-
-            //etc. suite des validations, on n'a pas fini ! 
-
-
-
-            //après toutes nos validations... 
-            //on tchèque si c'est valide !  
-            //si le tableau d'erreurs est encore vide, alors c'est que c'est bon pour aller de l'avant
-            if (empty($errorsList)) {
-                //instancie notre class
-                $user = new AppUser();
-
-                //hash le mdp 
-                $hash = password_hash($password, PASSWORD_DEFAULT);
-                $user->setPassword($hash);
-
-                //hydrate l'instance
-                $user->setEmail($email);
-                $user->setUsername($username);
-                $user->setRole($role);
-                $user->setStatus($status);
-
+            dump($errorList);
+            if (empty($messages) && empty($errorsList)) {
                 //la sauvegarde avec insert()
-                $user->insert();
+
+                if ($user->insert()) {
+                    $succesList['insertOk'] = 'account created';
+                    $this->redirectToRoute("admin-home");
+                }
             }
         }
 
-        $this->show('user/add', ['errorsList' => $errorsList]);
-    }
 
+        $this->show('back/user/add', [
+            'errorsList' => $errorsList,
+            'succesList' => $succesList,
+        ]);
+    }
 
     /**
      * method to update one user
@@ -278,7 +279,6 @@ class UserController extends CoreController
         }
     }
 }
-
 
 
 

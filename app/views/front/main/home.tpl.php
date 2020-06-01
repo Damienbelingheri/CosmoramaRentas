@@ -1,7 +1,15 @@
+
+<?php if (!empty($_SESSION['mailSent'])) : ?>
+
+    <div class="alert alert-success text-center font-weight-bold"><?= $_SESSION['mailSent'];
+    session_unset();
+    ?> </div>
+<?php endif; ?>
    <!-- Logo principale -->
    <section class="masthead d-flex cont__logo">
      <img id="logo" src="<?= $assetsBaseUri ?>/img/logo/LOGO-PRINCIPAL.png" alt="" >
    </section>
+
 
    </header>
    <div class="container my-4">

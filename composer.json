@@ -4,7 +4,8 @@
         "altorouter/altorouter": "^2.0",
         "benoclock/alto-dispatcher": "^1.0",
         "respect/validation": "^2.0",
-        "tightenco/collect": "^7.10"
+        "tightenco/collect": "^7.10",
+        "phpmailer/phpmailer": "^6.1"
         
     },
     "autoload": {

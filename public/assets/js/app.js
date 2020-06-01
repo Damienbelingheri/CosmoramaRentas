@@ -1,13 +1,13 @@
 let app = {
 
+
+   
     //on définit ici nos propriétés réutilisables dans notre code
     fetchOptions: {
         method: 'GET',
         mode: 'cors',
         cache: 'no-cache'
     },
-
-    baseUrl: "http://127.0.0.1:8000/api/",
 
     //par défaut c'est un tableau vide, mais quand la requête ajax sera terminée
     //cette propriété contiendra la liste des catégories
@@ -19,6 +19,7 @@ let app = {
         //pour être sûr que tout marche bien
         console.log("coucou depuis l'init");
 
+        
         //met en place toutes nos mises sous écoute
         app.listenForEvents();
     },
@@ -32,7 +33,7 @@ let app = {
 
         let selectedCategory = evt.currentTarget
 
-        fetch("http://127.0.0.1:8000/api/sub_category", app.fetchOptions)
+        fetch('/api/sub_category', app.fetchOptions)
             .then(
                 function (response) {
                     return response.json();
@@ -68,8 +69,6 @@ let app = {
                             }
 
                         })
-
-
                 }
 
             );

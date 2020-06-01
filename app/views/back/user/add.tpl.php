@@ -1,6 +1,6 @@
 
 <div class="container my-4">
-<a href="<?= $router->generate('user-list') ?>" class="btn btn-success float-right">Retour</a>
+<a href="<?= $router->generate('admin-user-list') ?>" class="btn btn-success float-right">Retour</a>
 <h2>Ajouter un produit</h2>
 
 <form action="" method="POST" class="mt-5">
@@ -33,7 +33,7 @@
         <?php endif; ?> -->
     </div><form method="POST" class="mt-5" novalidate="novalidate">
     <div class="form-group">
-        <label for="emailToConfront"> Vérification e-mail</label>
+        <label for="emailToConfront">Verificar Email</label>
         <input name="emailToConfront" type="email" class="form-control" id="email" placeholder="De nouveau">
         <!-- <?php if (!empty($errorsList['email'])): ?>
             <div class="text-danger font-weight-bold"><?= $errorsList['email'] ?></div>
@@ -42,14 +42,14 @@
 
     <!-- Mot de passe -->
     <div class="form-group">
-        <label for="password">Mot de passe</label>
+        <label for="password">Contraseña</label>
         <input name="password" type="password" value="<?= filter_input(INPUT_POST, 'password') ?>"  class="form-control" id="password" placeholder="Mot de passe" aria-describedby="subtitleHelpBlock">
         <!-- <?php if (!empty($errorsList['password'])): ?>
             <div class="text-danger font-weight-bold"><?= $errorsList['password'] ?></div>
         <?php endif; ?> -->
     </div>
     <div class="form-group">
-        <label for="passwordToConfront">Vérification mot de passe</label>
+        <label for="passwordToConfront">Vérificación Contraseña</label>
         <input name="passwordToConfront" value="<?= filter_input(INPUT_POST, 'paswordToCompare') ?>"  type="password" class="form-control" id="password" placeholder="De nouveau" aria-describedby="subtitleHelpBlock">
         <?php if (!empty($errorsList['password'])): ?>
             <div class="text-danger font-weight-bold"><?= $errorsList['password'] ?></div>
@@ -57,13 +57,13 @@
     </div>
 <!-- Mot de passe -->
 
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for="status">Role</label>
         <select name="role" type="number" class="form-control" id="role" placeholder="">
         <option value= "admin">Administrateur</option>
         <option value= "catalog-manager">Catalog manager</option>  
         </select>     
-    </div>
+    </div> -->
 
     <button type="submit" class="btn btn-primary btn-block mt-5">Creer un utilisateur</button></form>
 

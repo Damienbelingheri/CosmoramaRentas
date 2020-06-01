@@ -1,9 +1,9 @@
 <!--Section: Contact v.2-->
 
-<h2 class="h1-responsive font-weight-bold text-center my-4"><img class="contact__logo" src="<?= $assetsBaseUri ?>/img/logo/COSMORAMA-LOGO-GIF2.gif" alt=""></h2>
+<h2 class="h1-responsive font-weight-bold text-center my-4"><img class="contact__logo" src="<?= $assetsBaseUri ?>/img/logo/COSMORAMA-LOGO-GIF2.gif" alt=""> </h2>
 
 <section class="contact__form">
-    <form class="text-center">
+    <form method="POST" action="<?= $router->generate('sendMail') ?>" class="text-center">
         <div class="form-group">
             <input type="Nombre" name="name" class="form-control" id="inputNombre" placeholder="NOMBRE">
         </div>
@@ -13,9 +13,10 @@
       </div>
         <div class="form-group">
             <textarea class="form-control" name="message" id="inputMessage" placeholder="MENSAGE" rows="6"></textarea>
-        </div>
+        </div>  
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <button type="submit" class="btn btn-primary">Submit</button>
+  
     </form>
     </section>
 

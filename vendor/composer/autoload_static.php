@@ -29,6 +29,10 @@ class ComposerStaticInit88258b4a76b4442dbbb09e878caef336
             'Respect\\Validation\\' => 19,
             'Respect\\Stringifier\\' => 20,
         ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -55,6 +59,10 @@ class ComposerStaticInit88258b4a76b4442dbbb09e878caef336
         'Respect\\Stringifier\\' => 
         array (
             0 => __DIR__ . '/..' . '/respect/stringifier/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'App\\' => 
         array (

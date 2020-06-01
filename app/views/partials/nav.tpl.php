@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light ">
   <div class="container">
     <a class="navbar-brand" href="<?= $router->generate('main-home') ?>">
-      <img src="<?= $assetsBaseUri ?>img/logo/LOGO-PEQUEÑO.png" width="100" height="100" class="d-inline-block align-top" alt="">
+      <img src="<?= $assetsBaseUri ?>img/logo/LOGO-PEQUEÑO.png" width="80" height="80" class="d-inline-block align-top" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -23,8 +23,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter">Contacto</a>
-
-          
           <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
               <div class="modal-content">

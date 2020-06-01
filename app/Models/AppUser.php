@@ -34,13 +34,6 @@ class AppUser extends CoreModel
         return $stmt->fetchObject(self::class);
     }
 
-    //créer tous les getters et setters ! 
-
-    public static function find($appUserId)
-    {
-
-    }
-
     public static function findAll()
     {
         $pdo = Database::getPDO();

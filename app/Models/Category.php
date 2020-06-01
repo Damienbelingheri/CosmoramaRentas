@@ -12,11 +12,7 @@ class Category extends CoreModel {
     {
         return 'category';
     }
-
-
     
-
-
     /**
      * @var string
      */
