@@ -17,7 +17,6 @@ class ProductController extends CoreController
 {
     /******************************FrontOffice**********************************************/
 
-
     public function showProduct($id)
     {
         $product = Product::find($id);
@@ -25,11 +24,8 @@ class ProductController extends CoreController
 
         $this->show('front/product/detail', ['product' => $product, "pictures" => $pictures]);
     }
-
-
-
+    
     /******************************BackOffice**********************************************/
-
     /**
      * create new Product
      *
@@ -37,7 +33,6 @@ class ProductController extends CoreController
      */
     public function add()
     {
-
         $errorsInUploadPicture = [];
         $succesList = [];
         $errorList = [];
