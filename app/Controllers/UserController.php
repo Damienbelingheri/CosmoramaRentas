@@ -141,12 +141,13 @@ class UserController extends CoreController
 
             if ($passwordToConfront === $password) {
 
+                dump($password);
                 $password = password_hash($password, PASSWORD_DEFAULT);
             } else {
 
                 $errorsList["password"] = "Mot de passe ne correspondent pas ";
             }
-            dump('coucou', $username, $password, $errorsList);
+            dump('coucou', $username, $password, $errorsList,$email);
             //instancie notre class
             $user = new AppUser();
 
@@ -159,16 +160,14 @@ class UserController extends CoreController
             //$user->setStatus($status);
 
 
-            $userValidator = v::attribute('password', v::notEmpty()->regex("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/")
-                ->attribute('email', v::notEmpty()->email()))
-                ->attribute('username', v::notEmpty())->length(3, null);
-
+            $userValidator = v::attribute('email', v::notEmpty()->email())
+                ->attribute('username', v::notEmpty())
+                ->attribute('password', v::notEmpty()->regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/'));
 
             try {
                 $userValidator->assert($user);
             } catch (NestedValidationException $ex) {
                 $coll = collect($ex->getMessages());
-
                 $messages = $coll->flatten();
 
                 foreach ($coll as $key => $message)
@@ -179,13 +178,13 @@ class UserController extends CoreController
             dump($errorList);
             if (empty($messages) && empty($errorsList)) {
                 //la sauvegarde avec insert()
-
+                
                 if ($user->insert()) {
                     $succesList['insertOk'] = 'account created';
                     $this->redirectToRoute("admin-home");
                 }
             }
-        }
+       }
 
 
         $this->show('back/user/add', [
@@ -237,8 +236,8 @@ class UserController extends CoreController
             $user->setId($id);
             $user->setEmail($emailCompared);
             $user->setPassword($passwordHash);
-            $user->setRole($role);
-            $user->setStatus($status);
+           // $user->setRole($role);
+           // $user->setStatus($status);
 
             //si l'insert s'est bien passé... 
             if ($user->update()) {

@@ -52,17 +52,16 @@ class AppUser extends CoreModel
     {
         $pdo = Database::getPDO();
 
-        $sql = "INSERT INTO app_user (email, password, firstname, lastname, role, status) 
-                VALUES (:email, :password, :firstname, :lastname, :role, :status)";
+        $sql = "INSERT INTO app_user (username, email, password, firstname, lastname, role, status) 
+                VALUES (:username, :email, :password, :firstname, :lastname, :role, :status)";
 
         $stmt = $pdo->prepare($sql);
         $insertedRows = $stmt->execute([
             ":email" => $this->email, 
             ":password" => $this->password, 
-            ":firstname" => $this->firstname, 
-            ":lastname" => $this->lastname, 
-            ":role" => $this->role, 
-            ":status" => $this->status
+            ":username"=>$this->username,
+            // ":role" => $this->role, 
+            // ":status" => $this->status
         ]);
 
         if ($insertedRows){
