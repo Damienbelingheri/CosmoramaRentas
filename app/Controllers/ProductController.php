@@ -24,7 +24,7 @@ class ProductController extends CoreController
 
         $this->show('front/product/detail', ['product' => $product, "pictures" => $pictures]);
     }
-    
+
     /******************************BackOffice**********************************************/
     /**
      * create new Product
@@ -49,10 +49,10 @@ class ProductController extends CoreController
             $price = strip_tags(filter_input(INPUT_POST, 'price'));
             $categoryId = strip_tags(filter_input(INPUT_POST, 'category_id'));
             $slug = Utils::slugify($name);
-            if ( ($_POST["subCategory_id"])) {
+            if (($_POST["subCategory_id"])) {
                 $subCategoryId = strip_tags(filter_input(INPUT_POST, 'subCategory_id'));
             }
-           
+
             $product = new Product();
             $validator = new Validator;
             //INSERT IMAGE PRINCIPAL
@@ -109,29 +109,32 @@ class ProductController extends CoreController
 
             if (empty($messages) && $errorsInUploadPicture) {
 
-                //dump('coucou apres le premier if L.116');
+            
 
-                $succesList['product'] = "Your product has been added";
+             
                 //recupère le lastInsertId et le stock dans une variable
                 //qu'on utilise pour comme product_id  
-                if ((!empty($_FILES['imagesWithId']['name'][0])) && $lastId = $product->insert()) {
-                    //dump("coucou après insert l.122");
-                    $total = count($_FILES['imagesWithId']['name']);
-                    // Loop through each file
-                    for ($i = 0; $i < $total; $i++) {
-                        $imgFile = $_FILES['imagesWithId']['name'][$i];
-                        $tmp_dir = $_FILES['imagesWithId']['tmp_name'][$i];
-                        $imgSize = $_FILES['imagesWithId']['size'][$i];
+                if ($lastId = $product->insert()) {
+                    $succesList['product'] = "Your product has been added";
 
-                        $pictures = new Product;
-                        if (!is_null($uploadedPic = $validator->uploadPicture($imgFile, $tmp_dir, $imgSize))) {
-                            $pictures->setPicture($uploadedPic);
-                            $pictures->setProduct_id($lastId);
-                        }
+                    if ((!empty($_FILES['imagesWithId']['name'][0]))) {
+                        //dump("coucou après insert l.122");
+                        $total = count($_FILES['imagesWithId']['name']);
+                        // Loop through each file
+                        for ($i = 0; $i < $total; $i++) {
+                            $imgFile = $_FILES['imagesWithId']['name'][$i];
+                            $tmp_dir = $_FILES['imagesWithId']['tmp_name'][$i];
+                            $imgSize = $_FILES['imagesWithId']['size'][$i];
 
-                        if ($pictures->insertInPicture()) {
-                            $succesList['successPics'] = $i + 1 . " additional(s) picture(s) have been added";
+                            $pictures = new Product;
+                            if (!is_null($uploadedPic = $validator->uploadPicture($imgFile, $tmp_dir, $imgSize))) {
+                                $pictures->setPicture($uploadedPic);
+                                $pictures->setProduct_id($lastId);
+                            }
 
+                            if ($pictures->insertInPicture()) {
+                                $succesList['successPics'] = $i + 1 . " additional(s) picture(s) have been added";
+                            }
                         }
                     }
                 }
@@ -152,6 +155,7 @@ class ProductController extends CoreController
         );
     }
 
+
     /**
      * Update a Product
      *
@@ -160,7 +164,6 @@ class ProductController extends CoreController
      */
     public function update($id)
     {
-
 
         $errorsInUploadPicture = [];
         $succesList = [];
@@ -181,7 +184,7 @@ class ProductController extends CoreController
             $price = strip_tags(filter_input(INPUT_POST, 'price'));
             $categoryId = strip_tags(filter_input(INPUT_POST, 'category_id'));
             $subCategoryId = 0;
-            if ( ($_POST["subCategory_id"])) {
+            if (($_POST["subCategory_id"])) {
                 $subCategoryId = strip_tags(filter_input(INPUT_POST, 'subCategory_id'));
             }
 
@@ -265,7 +268,7 @@ class ProductController extends CoreController
                             $pictures->setProduct_id($id);
 
                             if ($pictures->insertInPicture()) {
-                                $succesList['success'] = $i+1 ." additional(s) picture(s) have been added ";
+                                $succesList['success'] = $i + 1 . " additional(s) picture(s) have been added ";
                                 //on redirige vers la liste des produits
                                 //$this->redirectToRoute("produ");     
                             };

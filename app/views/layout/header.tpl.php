@@ -31,6 +31,7 @@
     <?php
     
     if ( strpos($_SERVER['REQUEST_URI'], "admin")!== false || isset($_SESSION['userConnected'])) {
+
       include __DIR__ . '/../partials/navBackOffice.tpl.php';
     } else {
       include __DIR__ . '/../partials/nav.tpl.php';

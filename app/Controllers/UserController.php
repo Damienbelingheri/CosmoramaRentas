@@ -44,14 +44,13 @@ class UserController extends CoreController
 
             //aller chercher dans la bdd si j'ai bien un user ayant cet email
             $foundUser = AppUser::findByEmail($email);
-
             //si on trouve le user 
             if ($foundUser) {
                 //on vérifie que son mdp est bon
                 if (password_verify($password, $foundUser->getPassword())) {
                     //si c'est le bon... 
                     //connecte le user 
-                    $goodList[] = "Hola, " . $foundUser->getPseudo() . " (" . $foundUser->getRole() . ")";
+                    $goodList[] = "Hola, " . $foundUser->getUsername(). " (" . $foundUser->getRole() . ")";
                     $_SESSION['userConnected'] = ["userId" => $foundUser->getId(), "userObject" => $foundUser];
                     // redirect to main/select
 
@@ -69,6 +68,7 @@ class UserController extends CoreController
             }
         }
 
+        dump($errorsList,$goodList);
         $this->show('back/user/login', ["errorsList" => $errorsList, "goodList" => $goodList, 'temoin' => true]);
     }
 
@@ -124,7 +124,7 @@ class UserController extends CoreController
             $password = filter_input(INPUT_POST, 'password');
             $passwordToConfront = filter_input(INPUT_POST, 'passwordToConfront');
             $username = strip_tags(filter_input(INPUT_POST, 'username'));
-            //$role = strip_tags(filter_input(INPUT_POST, 'role'));
+            $role = strip_tags(filter_input(INPUT_POST, 'role'));
             //$status = strip_tags(filter_input(INPUT_POST, 'status'));
 
 
@@ -133,59 +133,49 @@ class UserController extends CoreController
             //        $errorsList['password'] = "la forma de tu contraseña es incorecta ! ";
             //    }
 
-            if ($emailToConfront === $email) {
-                $email;
-            } else {
-                $errorsList["email"] = "emails ne correspondent pas ";
+            if ($emailToConfront !== $email) {
+                $errorsList["emailCompared"] = "emails must be equals";
             }
 
-            if ($passwordToConfront === $password) {
-
-                dump($password);
-                $password = password_hash($password, PASSWORD_DEFAULT);
+            if ($passwordToConfront === $password ) {
+                $passwordCompared = password_hash($password, PASSWORD_DEFAULT);
             } else {
-
-                $errorsList["password"] = "Mot de passe ne correspondent pas ";
+                $errorsList["passwordCompared"] = "password must be equals ";
             }
-            dump('coucou', $username, $password, $errorsList,$email);
-            //instancie notre class
+
             $user = new AppUser();
 
-            $user->setPassword($password);
+            if (!v::regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/')->notEmpty()->validate($password)) { 
+            $errorsList['password']='Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character'; }// true
 
-            //hydrate l'instance
-            $user->setEmail($email);
-            $user->setUsername($username);
-            //$user->setRole($role);
-            //$user->setStatus($status);
+                //hydrate l'instance
+                $user->setEmail($email);
+                $user->setUsername($username);
+                $user->setPassword($passwordCompared);
+                $user->setRole($role);
+                //$user->setStatus($status);
 
+                $userValidator = v::attribute('email', v::notEmpty()->email())
+                    ->attribute('username', v::notEmpty())
+                    ->attribute('role', v::notEmpty()->regex('/^(admin|catalog-manager)$/'));
 
-            $userValidator = v::attribute('email', v::notEmpty()->email())
-                ->attribute('username', v::notEmpty())
-                ->attribute('password', v::notEmpty()->regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/'));
+                try {
+                    $userValidator->assert($user);
+                } catch (NestedValidationException $ex) {
+                    $coll = collect($ex->getMessages());
+                    $messages = $coll->flatten();
 
-            try {
-                $userValidator->assert($user);
-            } catch (NestedValidationException $ex) {
-                $coll = collect($ex->getMessages());
-                $messages = $coll->flatten();
-
-                foreach ($coll as $key => $message)
-                    $errorList["$key"] = $message;
-            }
-
-
-            dump($errorList);
-            if (empty($messages) && empty($errorsList)) {
-                //la sauvegarde avec insert()
-                
-                if ($user->insert()) {
-                    $succesList['insertOk'] = 'account created';
-                    $this->redirectToRoute("admin-home");
+                    foreach ($coll as $key => $message)
+                        $errorsList["$key"] = $message;
                 }
-            }
-       }
 
+                if (empty($errorsList)) {
+                    if ($user->insert()) {
+                        $succesList['insertOk'] = 'account created';
+                        $this->redirectToRoute("admin-home");
+                    }
+                }
+        }
 
         $this->show('back/user/add', [
             'errorsList' => $errorsList,
@@ -236,8 +226,8 @@ class UserController extends CoreController
             $user->setId($id);
             $user->setEmail($emailCompared);
             $user->setPassword($passwordHash);
-           // $user->setRole($role);
-           // $user->setStatus($status);
+            // $user->setRole($role);
+            // $user->setStatus($status);
 
             //si l'insert s'est bien passé... 
             if ($user->update()) {
@@ -272,8 +262,6 @@ class UserController extends CoreController
             //pour l'affichage, voir dans header.tpl.php
             $_SESSION['alert'] = "Votre utilisateur a bien été supprimée !";
             //on redirige vers la liste des categories
-
-
             $this->redirectToRoute("user-list");
         }
     }

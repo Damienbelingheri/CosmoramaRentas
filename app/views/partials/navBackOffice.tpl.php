@@ -36,7 +36,7 @@
             
                 <?php if(!empty($_SESSION['userConnected'])): ?>
                 <li class="nav-item">
-                    <h5><?= !empty($userConnected) ? $userConnected->getPseudo() : "" ?>
+                    <h5><?= !empty($userConnected) ? $userConnected->getUsername() : "" ?>
                     </h5>
                 </li>
             
