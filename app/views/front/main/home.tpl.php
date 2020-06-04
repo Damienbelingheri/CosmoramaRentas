@@ -1,9 +1,9 @@
 
 <?php if (!empty($_SESSION['mailSent'])) : ?>
 
-    <div class="alert alert-success text-center font-weight-bold"><?= $_SESSION['mailSent'];
+   <!--  <div class="alert alert-success text-center font-weight-bold"><?= $_SESSION['mailSent'];
     session_unset();
-    ?> </div>
+    ?> </div> -->
 <?php endif; ?>
    <!-- Logo principale -->
    <section class="masthead d-flex cont__logo">

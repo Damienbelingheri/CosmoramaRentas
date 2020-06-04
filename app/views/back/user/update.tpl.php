@@ -14,7 +14,7 @@
         <form action="" method="POST" class="mt-5">
             <div class="form-group">
                 <label for="username">Nombre de usuario</label>
-                <input name="username" type="text" class="form-control" id="username" placeholder="John">
+                <input name="username" value = "<?= $user->getUsername() ?>" type="text" class="form-control" id="username" placeholder="John">
                 <?php if (!empty($errorsList['username'])) : ?>
                     <div class="text-danger font-weight-bold"><?= $errorsList['username'] ?></div>
                 <?php endif; ?>
@@ -32,7 +32,7 @@
             <form method="POST" class="mt-5">
                 <div class="form-group">
                     <label for="email">E-mail</label>
-                    <input name="email" type="email" class="form-control" id="email" placeholder="email">
+                    <input value = "<?= $user->getEmail() ?>" name="email" type="email" class="form-control" id="email" placeholder="email">
                     <?php if (!empty($errorsList['email'])) : ?>
                         <div class="text-danger font-weight-bold"><?= $errorsList['email'] ?></div>
                     <?php endif; ?>

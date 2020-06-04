@@ -1,3 +1,3 @@
 <nav class="navbar navbar-dark bg-dark">
-  <!-- Navbar content -->
+coucou
 </nav>

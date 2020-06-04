@@ -39,8 +39,7 @@ class AppUser extends CoreModel
         $pdo = Database::getPDO();
 
         $sql = "SELECT * FROM app_user 
-                ORDER BY lastname ASC, `role` ASC";
-
+                ORDER BY username ASC, `role` ASC";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
@@ -70,6 +69,40 @@ class AppUser extends CoreModel
         }
         return false;
     }
+
+    public function update()
+
+    {
+        // Récupération de l'objet PDO représentant la connexion à la DB
+        $pdo = Database::getPDO();
+
+        // Ecriture de la requête UPDATE
+        $sql = "
+            UPDATE `app_user`
+            SET
+                email = :email,
+                password = :password,
+                username = :username 
+                role = :role,
+                
+            WHERE id = :id
+        ";
+
+
+        $stmt=$pdo->prepare($sql);
+
+
+        $updatedRows = $stmt->execute([
+          ":email" => $this->email,
+          ":password" => $this->password,
+          ":username" => $this->username,
+          ":role" => $this->role, 
+          ":id" => $this->id
+          ]);
+  
+          return ($updatedRows > 0);
+    }
+
 
     /**
      * Get the value of email

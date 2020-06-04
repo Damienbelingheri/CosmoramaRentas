@@ -5,6 +5,13 @@
  <h2 class="h1-responsive font-weight-bold text-center my-4"><img class="contact__logo" src="<?= $assetsBaseUri ?>/img/logo/COSMORAMA-LOGO-GIF2.gif" alt=""></h2>
 
 <section class="contact__form">
+
+
+<form action="" method="POST" class="mt-5">
+        <!-- pour se protéger des attaques csrf -->
+        <input type="hidden" name="csrf_token" value="<?= $csrfToken ?>">
+        
+ <?php // dd($csrfToken, 'depuis le form') ?>
     <form class="text-center" method="POST">
         <div class="form-group">
             <input type="email" name="email" class="form-control" id="email" placeholder="email">

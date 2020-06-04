@@ -13,33 +13,32 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?= $router->generate('admin-home') ?>">HOME <span
+                    <a class="nav-link" href="<?= $router->generate('admin-home') ?>">Home<span
                             class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="">Categorias</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="<?= $router->generate('admin-product-list')?>">Productos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">PROMOCIONES</a>
+                    <a class="nav-link" href="#">Promociones</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
+           <!--  <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Rechercher">
                 <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Rechercher</button>
-            </form>
-            <ul class="navbar-nav mr-auto">
+            </form> -->
+            <ul class="navbar-nav ">
 
         
             
                 <?php if(!empty($_SESSION['userConnected'])): ?>
-                <li class="nav-item">
-                    <h5><?= !empty($userConnected) ? $userConnected->getUsername() : "" ?>
-                    </h5>
+                <li class="nav-item" style="padding-top: 8px">
+                    <p><?= !empty($userConnected) ? $userConnected->getUsername() : "" ?>
+                    </p>
                 </li>
-            
 
                 <?php if(in_array($userConnected->getRole(), ["admin","superadmin"]) ):?>
 

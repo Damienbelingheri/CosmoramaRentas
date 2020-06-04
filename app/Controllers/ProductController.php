@@ -66,7 +66,6 @@ class ProductController extends CoreController
             } else {
                 $validator->setErrors("Image requiered");
             }
-
             $product->setName($name);
             $product->setDescription($description);
             $product->setInclude($include);
@@ -109,9 +108,6 @@ class ProductController extends CoreController
 
             if (empty($messages) && $errorsInUploadPicture) {
 
-            
-
-             
                 //recupère le lastInsertId et le stock dans une variable
                 //qu'on utilise pour comme product_id  
                 if ($lastId = $product->insert()) {
@@ -131,7 +127,6 @@ class ProductController extends CoreController
                                 $pictures->setPicture($uploadedPic);
                                 $pictures->setProduct_id($lastId);
                             }
-
                             if ($pictures->insertInPicture()) {
                                 $succesList['successPics'] = $i + 1 . " additional(s) picture(s) have been added";
                             }
@@ -154,8 +149,6 @@ class ProductController extends CoreController
             ]
         );
     }
-
-
     /**
      * Update a Product
      *
@@ -164,15 +157,12 @@ class ProductController extends CoreController
      */
     public function update($id)
     {
-
         $errorsInUploadPicture = [];
         $succesList = [];
         $errorList = [];
         $messages = [];
         $validator = [];
-
         if (!empty($_POST['update'])) {
-
             //récupère les données du form
             //le strip_tags vire les éventuelles balises HTML des données 
             //ça nous protège des attaques XSS
@@ -187,19 +177,14 @@ class ProductController extends CoreController
             if (($_POST["subCategory_id"])) {
                 $subCategoryId = strip_tags(filter_input(INPUT_POST, 'subCategory_id'));
             }
-
             $slug = Utils::slugify($name);
-
             //INSERT IMAGE PRINCIPAL
             $imgFile = $_FILES['image']['name'];
             $tmp_dir = $_FILES['image']['tmp_name'];
             $imgSize = $_FILES['image']['size'];
 
-
-
             $product = new Product();
             $validator = new Validator;
-
 
             if (($picturePrin = Product::find($id)->getImage()) && !empty($imgFile)) {
 
@@ -207,7 +192,6 @@ class ProductController extends CoreController
                     $product->setImage($updatedImg);
                 }
             }
-
             $product = new Product();
             $product->setId($id);
             $product->setName($name);
@@ -293,6 +277,31 @@ class ProductController extends CoreController
         );
     }
 
+
+
+
+    /**
+     * delete product
+     *
+     * 
+     *
+     */
+    public function delete($id)
+    {
+
+        $product = new Product();
+        $product->setId($id);
+
+        if ($product->delete($id)) {
+            //ajoute un message qui s'affichera sur la prochaine page ! 
+            //pour l'affichage, voir dans header.tpl.php
+            $_SESSION['alert'] = "El producto ha sido eliminado!";
+            //on redirige vers la liste des produits
+            $this->redirectToRoute("admin-product-list");
+        }
+    }
+
+    
     /**
      * Delete additionals photos
      *
@@ -310,7 +319,6 @@ class ProductController extends CoreController
         unlink($_SERVER['DOCUMENT_ROOT'] . '/assets/img/productos/' . $picture);
         // it will delete an actual record from db
         Product::deleteInPicture($id);
-
         $this->redirectToRoute("admin-product-update", ['id' => $categoryId]);
     }
 
@@ -327,4 +335,8 @@ class ProductController extends CoreController
         $products = Product::findAll();
         $this->show('back/product/list', ['categories' => $category, 'products' => $products]);
     }
+
+
+
+
 }

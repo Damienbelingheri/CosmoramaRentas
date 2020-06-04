@@ -5,13 +5,14 @@ namespace App\Controllers;
 use App\Models\Category;
 
 class CoreController {
-/* 
+
      public function __construct()
     {
         //pour savoir sur quelle page on est en ce moment
         global $match;
         //le nom de la route sur laquelle on est
         $currentRouteName = $match['name'];
+        //dd($match);
         
         //la liste des noms de routes, et des rôles qui permettent d'y accéder
         //en clé, on a le nom de la route
@@ -21,15 +22,24 @@ class CoreController {
             'main-home' => 'anonymous',
             'main-category' =>'anonymous',
             'main-product' => 'anonymous',
-            'admin-home' => 'anonymous',
-            'admin-user-login' => 'anonymous',
-            'admin-user-list' => 'anonymous',
-            'admin-user-logout' => 'anonymous',
-            'delete-imageAddi' =>'anonymous',
+            'sendMail' => 'anonymous',
+            'api-subcategories' =>'anonymous',
 
-            'admin-category-add'=> 'anonymous',
+            'admin-user-login' => 'anonymous',
+            'admin-home' => ['admin', 'catalog-manager'],
+            'admin-user-logout' => ['admin', 'catalog-manager'],
+            'admin-user-list'=> ['admin'],
+            'admin-user-add' => ['admin'],
+            'admin-user-update' => ['admin'],
+            'admin-user-delete' =>['admin'],
+            'admin-product-add'=> ['admin', 'catalog-manager'],
+            'admin-product-update'=> ['admin', 'catalog-manager'],
+            'admin-product-delete'=> ['admin', 'catalog-manager'],
+            'delete-imageAddi' =>['admin', 'catalog-manager'],
+
             
-        
+    
+
             //'user-logout' => ['admin', 'catalog-manager'],
         ];
 
@@ -37,7 +47,8 @@ class CoreController {
         //c'est obligatoire de l'ajouter, pour être sûr de ne pas oublier
         if (!array_key_exists($currentRouteName, $acl)){
             //on prévient le dév d'ajouter sa route
-            die('yoooo ! ajoute ta route dans les acls du CoreController.php !');
+           // die('yoooo ! ajoute ta route dans les acls du CoreController.php !');
+           $this->err404();
         }
 
         //liste des rôles autorisés pour la page actuelle
@@ -45,37 +56,31 @@ class CoreController {
         //si le rôle demandé pour la page actuelle est anonymous, alors on ne fait rien
         //sinon...
         if ($allowedRoles !== 'anonymous'){
+           
             //on appelle notre méthode de check
             $this->checkAuthorization($allowedRoles);
         }
-    }   */
+    } 
 
     protected function checkAuthorization($allowedRoles = [])
-    {
-        
+    {  
         //si le user n'est pas connecté ... 
-        if (empty($_SESSION['userObject'])){
+        if (empty($_SESSION['userConnected'])){
+           // dd($_SESSION);
             //un ptit message qui s'affichera sur le login
             $_SESSION['alert'] = "Veuillez vous connecter d'abord !";
 
             //redirige gentiment vers le login 
-            $this->redirectToRoute("user-login");
+            $this->redirectToRoute("admin-user-login");
         }
         //sinon, s'il est connecté
         else {
             //récupérer les infos du user connecté
-            $user = $_SESSION['userObject'];
-
+            $user = $_SESSION['userConnected']['userObject'];
             //récupére son role
             $role = $user->getRole();
-
             //est-ce que le rôle du user fait parti des rôles autorisés pour cette page ?
             //si non (le rôle n'est pas autorisé)
-
-
-            //if (!in_array("admin", ["admin", "catalog-manager"])){
-
-            //}
 
             if (!in_array($role, $allowedRoles)){
                 //on pète une erreur 403
@@ -86,6 +91,15 @@ class CoreController {
             }
         }
         
+    }
+
+    public function err404() {
+        // On envoie le header 404
+        header('HTTP/1.0 404 Not Found');
+
+        // Puis on gère l'affichage
+        $this->show('error/err404');
+        die();
     }
 
 
@@ -145,6 +159,7 @@ class CoreController {
         //pour se protégrer des attaques CSRF
         //on génère une chaîne aléatoire
         $csrfToken = bin2hex(random_bytes(32));
+
         //on la stocke dans la session pour pouvoir la retrouver après soumission du form
         $_SESSION['csrfToken'] = $csrfToken;
 

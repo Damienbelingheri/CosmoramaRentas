@@ -82,6 +82,12 @@ $router->map('GET', '/admin/user/list', 'UserController#list', 'admin-user-list'
 //user-add
 $router->map('GET|POST', '/admin/user/add', 'UserController#add', 'admin-user-add');
 
+//user update
+$router->map('GET|POST', '/admin/user/update/[i:id]', 'UserController#update', 'admin-user-update');
+
+// user delete
+$router->map('GET|POST', '/admin/user/delete/[i:id]', 'UserController#delete', 'admin-user-delete');
+
 
 
 //product list
@@ -93,9 +99,11 @@ $router->map('GET|POST','/admin/product/add', 'ProductController#add', 'admin-pr
 //update-product
 $router->map('GET|POST', '/admin/product/update/[i:id]', 'ProductController#update', 'admin-product-update');
 
+//delete-product
+$router->map('GET|POST', '/delete/imageAddi/[i:id]', 'ProductController#delete', 'delete-imageAddi');
 
 // delete additionals images
-$router->map('GET|POST', '/delete/imageAddi/[i:id]', 'ProductController#deleteImageAddi', 'delete-imageAddi');
+$router->map('GET|POST', '/delete/imageAddi/[i:id]', 'ProductController#deleteImageAddi', 'admin-product-delete');
 
 
                                             /* API */
@@ -103,7 +111,7 @@ $router->map('GET|POST', '/delete/imageAddi/[i:id]', 'ProductController#deleteIm
 $router->map('GET|POST', '/api/sub_category', 'ApiController#apiSubcategories', 'api-subcategories');
 
 //TODO changer le controller 
-$router->map('GET|POST', '/sendmail', 'ApiController#sendMail', 'sendMail');
+$router->map('GET|POST', '/sendmail', 'MainController#sendMail', 'sendMail');
 /* -------------
 --- DISPATCH ---
 --------------*/
