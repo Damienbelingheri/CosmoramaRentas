@@ -1,5 +1,5 @@
 body {
-    width: 80%;
+    width: 100%;
 
     margin: auto;
 
@@ -350,9 +350,9 @@ label {
     width: 50px;
 }
 
-@media all and (max-width: 1400px) {
+@media (min-width: 1500px) {
     body{
-        width: 100%;
+        width: 80%;
     }
 }
 
