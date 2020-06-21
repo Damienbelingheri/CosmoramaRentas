@@ -55,7 +55,7 @@
                                                 <i class="fas fa-trash" aria-hidden="true"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="<?php // $router->generate('product-delete', ['id' => $category->getId()]);
+                                                <a class="dropdown-item" href="<?=  $router->generate('admin-product-delete', ['id' => $category->getId()]);
                                                                                 ?>">Si, quiero borrar</a>
                                                 <a class="dropdown-item" href="#" data-toggle="dropdown">Oups !</a>
                                             </div>

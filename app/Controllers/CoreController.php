@@ -35,7 +35,8 @@ class CoreController {
             'admin-product-add'=> ['admin', 'catalog-manager'],
             'admin-product-update'=> ['admin', 'catalog-manager'],
             'admin-product-delete'=> ['admin', 'catalog-manager'],
-            'delete-imageAddi' =>['admin', 'catalog-manager'],
+            'admin-product-list'=> ['admin', 'catalog-manager'],
+            'admin-delete-imageAddi' =>['admin', 'catalog-manager'],
 
             
     
@@ -187,3 +188,4 @@ class CoreController {
          die();
     }
 }
+

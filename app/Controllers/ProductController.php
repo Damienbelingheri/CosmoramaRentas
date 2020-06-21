@@ -38,6 +38,7 @@ class ProductController extends CoreController
         $errorList = [];
         $messages = [];
         $validator = [];
+        $subCategory_id = [];
         if (isset($_POST['upload'])) {
 
             $subCategoryId = 0;
@@ -293,10 +294,13 @@ class ProductController extends CoreController
         $product->setId($id);
 
         if ($product->delete($id)) {
+            
+
             //ajoute un message qui s'affichera sur la prochaine page ! 
             //pour l'affichage, voir dans header.tpl.php
             $_SESSION['alert'] = "El producto ha sido eliminado!";
             //on redirige vers la liste des produits
+           // dd("coucou");
             $this->redirectToRoute("admin-product-list");
         }
     }
@@ -313,18 +317,20 @@ class ProductController extends CoreController
     {
         $result = Product::findPictureById($id);
         $picture = $result->getPicture();
-        $categoryId = $result->getProduct_id();
-        //dd($picture);
+        $productId = $result->getProduct_id();
+   
         // select image from db to delete 
         unlink($_SERVER['DOCUMENT_ROOT'] . '/assets/img/productos/' . $picture);
         // it will delete an actual record from db
-        Product::deleteInPicture($id);
-        $this->redirectToRoute("admin-product-update", ['id' => $categoryId]);
+
+        if (Product::deleteInPicture($id)){
+        $this->redirectToRoute("admin-product-update", ['id' => $productId]);
+        }
     }
 
     /**
      * list product 
-     * @route /admin/product/list, name = admin-product-list
+     * @Route /admin/product/list, name = admin-product-list
      * 
      * @return void
      */

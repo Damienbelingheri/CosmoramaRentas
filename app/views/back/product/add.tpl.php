@@ -1,6 +1,6 @@
-</header>
-<a href="<? /* $router->generate('product-list')  */ ?>" class="btn btn-success float-right">Retour</a>
-<h2 class="action__title">agregar un producto</h2>
+
+<a href="<?= $router->generate('admin-product-list') ?>" class="btn btn-success float-right">back</a>
+<h2 class="action__title">Agregar un producto</h2>
 
 
 

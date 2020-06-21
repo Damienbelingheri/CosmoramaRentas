@@ -100,10 +100,10 @@ $router->map('GET|POST','/admin/product/add', 'ProductController#add', 'admin-pr
 $router->map('GET|POST', '/admin/product/update/[i:id]', 'ProductController#update', 'admin-product-update');
 
 //delete-product
-$router->map('GET|POST', '/delete/imageAddi/[i:id]', 'ProductController#delete', 'delete-imageAddi');
+$router->map('GET|POST', '/delete/product/[i:id]', 'ProductController#delete', 'admin-product-delete');
 
 // delete additionals images
-$router->map('GET|POST', '/delete/imageAddi/[i:id]', 'ProductController#deleteImageAddi', 'admin-product-delete');
+$router->map('GET|POST', '/delete/imageAddi/[i:id]', 'ProductController#deleteImageAddi', 'admin-delete-imageAddi');
 
 
                                             /* API */

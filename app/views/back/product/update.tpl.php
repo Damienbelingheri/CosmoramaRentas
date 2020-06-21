@@ -1,4 +1,4 @@
-    <a href="<? /* $router->generate('product-list')  */ ?>" class="btn btn-success float-right">Retour</a>
+    <a href="<?= $router->generate('admin-product-list') ?>" class="btn btn-success float-right">Back</a>
     <h2 class="action__title">Actualizar un producto</h2>
 
 
@@ -50,7 +50,7 @@
                                 <img src="<?= $assetsBaseUri ?>img/productos/<?= $image->getPicture() ?>" class="img-rounded" />
                                 <p class="page-header">
                                     <span>
-                                        <a class="btn btn-danger" href="<?= $router->generate('delete-imageAddi', ['id' => $image->getId()]); ?>" title="click for delete" onclick="return confirm('sure to delete ?')"><span class="glyphicon glyphicon-remove-circle"></span> Delete</a>
+                                        <a class="btn btn-danger" href="<?= $router->generate('admin-delete-imageAddi', ['id' => $image->getId()]); ?>" title="click for delete" onclick="return confirm('sure to delete ?')"><span class="glyphicon glyphicon-remove-circle"></span> Delete</a>
                                     </span>
                                 </p>
                             </div>

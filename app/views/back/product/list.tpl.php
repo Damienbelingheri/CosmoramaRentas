@@ -1,5 +1,5 @@
     <div class="container my-4">
-        <a href="<?= $router->generate('admin-product-add'); ?>" class="btn btn-success float-right">Ajouter</a>
+        <a href="<?= $router->generate('admin-product-add'); ?>" class="btn btn-success float-right">Agregar</a>
         <h1>Lista de productos</h1>
         <?php foreach ($categories as $category) : ?>
             <h2 class="list__title"><?= $category->getName() ?></h2>
@@ -32,9 +32,9 @@
                                         <i class="fas fa-trash" aria-hidden="true"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="<? // $router->generate('product-delete', ['id' => $product->getId()]);
-                                                                    ?>">Si, quiero borrar</a>
-                                        <a class="dropdown-item" href="#" data-toggle="dropdown">Oups !</a>
+                                    <a class="dropdown-item" href="<?=  $router->generate('admin-product-delete', ['id' => $product->getId()]);
+                                                                                ?>">Si, quiero borrar</a>
+                                                <a class="dropdown-item" href="#" data-toggle="dropdown">Oups !</a>
                                     </div>
                                 </div>
                             </td>

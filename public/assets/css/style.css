@@ -350,6 +350,12 @@ label {
     width: 50px;
 }
 
+@media all and (max-width: 1400px) {
+    body{
+        width: 100%;
+    }
+}
+
 @media all and (max-width: 767px) {
     .carousel-container #carousel-thumbs img {
         border-width: 3px;
