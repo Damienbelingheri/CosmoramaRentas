@@ -3,5 +3,5 @@ vendor
 # Fichier de config
 app/config.ini
 
-
-
+#image
+public/assets/img/productos
