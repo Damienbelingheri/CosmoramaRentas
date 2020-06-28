@@ -183,19 +183,18 @@ class ProductController extends CoreController
             $imgFile = $_FILES['image']['name'];
             $tmp_dir = $_FILES['image']['tmp_name'];
             $imgSize = $_FILES['image']['size'];
-
             $product = new Product();
             $validator = new Validator;
-
+            $updatedImg = Product::find($id)->getImage();
             if (($picturePrin = Product::find($id)->getImage()) && !empty($imgFile)) {
-
                 if ($updatedImg = $validator->updatePicture($picturePrin, $tmp_dir, $imgFile, $imgSize)) {;
-                    $product->setImage($updatedImg);
+                    
                 }
             }
             $product = new Product();
             $product->setId($id);
             $product->setName($name);
+            $product->setImage($updatedImg);
             $product->setDescription($description);
             $product->setInclude($include);
             $product->setVideo($video);
@@ -205,6 +204,7 @@ class ProductController extends CoreController
             $product->setSubCategory_id($subCategoryId);
             $product->setSlug($slug);
 
+            
 
             //VALIDATION
             //FROM RESPECT/VALIDATION
@@ -235,23 +235,27 @@ class ProductController extends CoreController
             if (empty($messages) && $errorsInUploadPicture) {
 
                 $succesList['product'] = "The product $name has been updated";
+
                 if ((!empty($_FILES['imagesWithId']['name'][0])) && $product->update()) {
 
                     $total = count($_FILES['imagesWithId']['name']);
+
                     // Loop through each file
+
                     for ($i = 0; $i < $total; $i++) {
+
                         $imgFile = $_FILES['imagesWithId']['name'][$i];
                         $tmp_dir = $_FILES['imagesWithId']['tmp_name'][$i];
                         $imgSize = $_FILES['imagesWithId']['size'][$i];
+
                         if (empty($imgFile)) {
+
                         } else {
                             $uploadedPic = $validator->uploadPicture($imgFile, $tmp_dir, $imgSize);
-
                             // Ajout BDD
                             $pictures = new Product;
                             $pictures->setPicture($uploadedPic);
                             $pictures->setProduct_id($id);
-
                             if ($pictures->insertInPicture()) {
                                 $succesList['success'] = $i + 1 . " additional(s) picture(s) have been added ";
                                 //on redirige vers la liste des produits
@@ -262,7 +266,6 @@ class ProductController extends CoreController
                 }
             }
         }
-
         $this->show(
             'back/product/update',
             [
@@ -278,14 +281,9 @@ class ProductController extends CoreController
         );
     }
 
-
-
-
     /**
      * delete product
-     *
      * 
-     *
      */
     public function delete($id)
     {
@@ -294,18 +292,18 @@ class ProductController extends CoreController
         $product->setId($id);
 
         if ($product->delete($id)) {
-            
+
 
             //ajoute un message qui s'affichera sur la prochaine page ! 
             //pour l'affichage, voir dans header.tpl.php
             $_SESSION['alert'] = "El producto ha sido eliminado!";
             //on redirige vers la liste des produits
-           // dd("coucou");
+            // dd("coucou");
             $this->redirectToRoute("admin-product-list");
         }
     }
 
-    
+
     /**
      * Delete additionals photos
      *
@@ -318,13 +316,13 @@ class ProductController extends CoreController
         $result = Product::findPictureById($id);
         $picture = $result->getPicture();
         $productId = $result->getProduct_id();
-   
+
         // select image from db to delete 
         unlink($_SERVER['DOCUMENT_ROOT'] . '/assets/img/productos/' . $picture);
         // it will delete an actual record from db
 
-        if (Product::deleteInPicture($id)){
-        $this->redirectToRoute("admin-product-update", ['id' => $productId]);
+        if (Product::deleteInPicture($id)) {
+            $this->redirectToRoute("admin-product-update", ['id' => $productId]);
         }
     }
 
@@ -341,8 +339,4 @@ class ProductController extends CoreController
         $products = Product::findAll();
         $this->show('back/product/list', ['categories' => $category, 'products' => $products]);
     }
-
-
-
-
 }
