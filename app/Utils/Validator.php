@@ -36,7 +36,11 @@ class Validator
     public function updatePicture($pictureInDbb, $tmp_dir, $imgFile, $imgSize)
     {
         if ($imgFile) {
+
+
+            
             $upload_dir = __DIR__ . '/../../public/assets/img/productos/'; // upload directory 
+            //dd($upload_dir);
             $imgExt = strtolower(pathinfo($imgFile, PATHINFO_EXTENSION)); // get image extension
             $valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
             $upadatedImg = str_replace(" ", "-", $pictureInDbb);

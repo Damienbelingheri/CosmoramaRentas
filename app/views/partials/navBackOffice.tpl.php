@@ -65,14 +65,3 @@
 
     </div>
 </nav>
-<!-- 
-
-<?php $un = 1 ?> 
-
-<?php if($blabla): ?> 
-<?php if($blbla): ?> 
-<?php else: ?> 
-    bla
-<?php endif; ?> 
-<?php endif; ?> 
- -->
