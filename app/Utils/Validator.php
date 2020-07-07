@@ -20,6 +20,7 @@ class Validator
         if (in_array($imgExt, $valid_extensions)) {
             // Check file size '5MB'
             // 
+
             if ($imgSize < 2000000) {
                 //Setup our new file path
                 $upload_dir = __DIR__ . '/../../public/assets/img/productos/' . $pic; // upload directory
@@ -66,6 +67,8 @@ class Validator
         return $upadatedImg;
     }
 
+
+    
 
     /**
      * Get the value of errors

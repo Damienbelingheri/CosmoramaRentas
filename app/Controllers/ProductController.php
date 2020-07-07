@@ -115,7 +115,6 @@ class ProductController extends CoreController
                     $succesList['product'] = "Your product has been added";
 
                     if ((!empty($_FILES['imagesWithId']['name'][0]))) {
-                        //dump("coucou après insert l.122");
                         $total = count($_FILES['imagesWithId']['name']);
                         // Loop through each file
                         for ($i = 0; $i < $total; $i++) {
@@ -188,9 +187,8 @@ class ProductController extends CoreController
             $updatedImg = Product::find($id)->getImage();
             if (($picturePrin = Product::find($id)->getImage()) && !empty($imgFile)) {
                 $updatedImg = $validator->updatePicture($picturePrin, $tmp_dir, $imgFile, $imgSize);
-                dump($updatedImg);
+                //dump($updatedImg);
             }
-            dump($updatedImg);
             $product = new Product();
             $product->setId($id);
             $product->setName($name);
@@ -205,7 +203,7 @@ class ProductController extends CoreController
             $product->setSlug($slug);
 
 
-            dump($product);
+            
 
             //VALIDATION
             //FROM RESPECT/VALIDATION
@@ -215,7 +213,7 @@ class ProductController extends CoreController
             $userValidator = v::attribute('name', v::notEmpty()->length(3, null))
                 ->attribute('description', v::notEmpty())
                 ->attribute('include', v::notEmpty())
-                ->attribute('video', v::url())
+               // ->attribute('video', v::url())
                 ->attribute('status', v::number()->between(0, 1))
                 ->attribute('price', v::number())
                 ->attribute('category_id', v::number()->between(1, $maxCategory))
@@ -293,6 +291,7 @@ class ProductController extends CoreController
 
             //ajoute un message qui s'affichera sur la prochaine page ! 
             //pour l'affichage, voir dans header.tpl.php
+
             $_SESSION['alert'] = "El producto ha sido eliminado!";
             //on redirige vers la liste des produits
             // dd("coucou");
