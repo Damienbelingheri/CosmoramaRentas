@@ -85,7 +85,7 @@ class ProductController extends CoreController
             $userValidator = v::attribute('name', v::notEmpty()->length(3, null))
                 ->attribute('description', v::notEmpty())
                 ->attribute('include', v::notEmpty())
-                ->attribute('video', v::url())
+                //->attribute('video',v::url())
                 ->attribute('status', v::number()->between(0, 1))
                 ->attribute('price', v::number())
                 ->attribute('category_id', v::number()->between(1, $maxCategory))
@@ -187,10 +187,10 @@ class ProductController extends CoreController
             $validator = new Validator;
             $updatedImg = Product::find($id)->getImage();
             if (($picturePrin = Product::find($id)->getImage()) && !empty($imgFile)) {
-                if ($updatedImg = $validator->updatePicture($picturePrin, $tmp_dir, $imgFile, $imgSize)) {;
-                    
-                }
+                $updatedImg = $validator->updatePicture($picturePrin, $tmp_dir, $imgFile, $imgSize);
+                dump($updatedImg);
             }
+            dump($updatedImg);
             $product = new Product();
             $product->setId($id);
             $product->setName($name);
@@ -204,7 +204,8 @@ class ProductController extends CoreController
             $product->setSubCategory_id($subCategoryId);
             $product->setSlug($slug);
 
-            
+
+            dump($product);
 
             //VALIDATION
             //FROM RESPECT/VALIDATION
@@ -235,22 +236,18 @@ class ProductController extends CoreController
             if (empty($messages) && $errorsInUploadPicture) {
 
                 $succesList['product'] = "The product $name has been updated";
+               // dd($_FILES['imagesWithId']);
+                if ($product->update()) {
+                    if ((!empty($_FILES['imagesWithId']['name'][0]))) {
 
-                if ((!empty($_FILES['imagesWithId']['name'][0])) && $product->update()) {
+                        $total = count($_FILES['imagesWithId']['name']);
 
-                    $total = count($_FILES['imagesWithId']['name']);
+                        // Loop through each file
+                        for ($i = 0; $i < $total; $i++) {
+                            $imgFile = $_FILES['imagesWithId']['name'][$i];
+                            $tmp_dir = $_FILES['imagesWithId']['tmp_name'][$i];
+                            $imgSize = $_FILES['imagesWithId']['size'][$i];
 
-                    // Loop through each file
-
-                    for ($i = 0; $i < $total; $i++) {
-
-                        $imgFile = $_FILES['imagesWithId']['name'][$i];
-                        $tmp_dir = $_FILES['imagesWithId']['tmp_name'][$i];
-                        $imgSize = $_FILES['imagesWithId']['size'][$i];
-
-                        if (empty($imgFile)) {
-
-                        } else {
                             $uploadedPic = $validator->uploadPicture($imgFile, $tmp_dir, $imgSize);
                             // Ajout BDD
                             $pictures = new Product;

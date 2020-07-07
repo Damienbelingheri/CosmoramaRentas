@@ -33,19 +33,21 @@ class Validator
         }
     }
 
+
+    //Product::find($id)->getImage())
     public function updatePicture($pictureInDbb, $tmp_dir, $imgFile, $imgSize)
     {
         if ($imgFile) {
-
 
             
             $upload_dir = __DIR__ . '/../../public/assets/img/productos/'; // upload directory 
             //dd($upload_dir);
             $imgExt = strtolower(pathinfo($imgFile, PATHINFO_EXTENSION)); // get image extension
             $valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
-            $upadatedImg = str_replace(" ", "-", $pictureInDbb);
+            $upadatedImg = str_replace(" ", "-", $imgFile);
             if (in_array($imgExt, $valid_extensions)) {
                 if ($imgSize < 5000000) {
+                    //TODO  Modifier 
                     unlink($upload_dir . $pictureInDbb);
                     move_uploaded_file($tmp_dir, $upload_dir . $upadatedImg);
                 } else {
@@ -55,10 +57,12 @@ class Validator
                 $this->setErrors("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
             }
         } else {
+
             // if no image selected the old image remain as it is.
-            $upadatedImg = $pictureInDbb; // old image from database
+           return $upadatedImg = $pictureInDbb; // old image from database
         }
 
+       // dd("coucou");
         return $upadatedImg;
     }
 

@@ -30,11 +30,9 @@
   </section>
 <?php else : ?>
   <section class="content-section content_list">
-
     <div class="container subCategory__container">
       <div class="row no-gutters">
         <?php foreach ($products as $product) : ?>
-
           <div class=" list_product__picture _bo col-lg-6">
             <a href="<?= $router->generate('main-product', ['id' => $product->getId()]); ?>">
               <img class="image _bp" src="<?= $assetsBaseUri ?>img/productos/<?= $product->getImage() ?>" />
