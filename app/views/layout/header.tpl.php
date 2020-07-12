@@ -35,4 +35,8 @@
     } else {
       include __DIR__ . '/../partials/nav.tpl.php';
     }
+
+    if ($_SESSION['mailSent']):
     ?>
+     <div class="alert alert-success text-center font-weight-bold"><?= $_SESSION['mailSent']?> </div>
+    <?php endif ?>
