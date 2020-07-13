@@ -35,7 +35,7 @@ class Validator
     }
 
 
-    //Product::find($id)->getImage())
+    
     public function updatePicture($pictureInDbb, $tmp_dir, $imgFile, $imgSize)
     {
         if ($imgFile) {
