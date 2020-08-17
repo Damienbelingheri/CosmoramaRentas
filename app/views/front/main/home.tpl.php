@@ -46,10 +46,14 @@
 
 
 
+
    <!-- Categories -->
    <section class="row no-gutters">
      <!--  TODO Ajouter un lien qui renvoie a la cat séléctionné  -->
+
      <?php foreach ($categories as $category) : ?>
+    
+    
        <div class=" overlay-image _bo col-lg-4"><a href="<?= $router->generate('main-category', ['id' => $category->getId()]); ?>">
            <img class=" image _bp " src=" <?= $assetsBaseUri ?><?= $category->getPicture(); ?> " alt="Alt text" />
            <div class=" hover _bq ">

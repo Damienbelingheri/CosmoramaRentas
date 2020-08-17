@@ -195,6 +195,7 @@ class Product extends CoreModel {
                 price = :price,
                 status = :status,
                 category_id = :category_id,
+                subcategory_id = :subcategory_id,
                 slug = :slug,
                 updated_at = NOW()
             WHERE id = :id
@@ -210,6 +211,7 @@ class Product extends CoreModel {
             ":status" => $this->status,
             ":price" => $this->price,
             ":category_id" => $this->category_id, 
+            ":subcategory_id" => $this->subCategory_id, 
             ":slug" =>$this->slug,
             ":id" => $this->id
         ]);

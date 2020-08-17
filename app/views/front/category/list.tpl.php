@@ -5,7 +5,7 @@
     <div class="overlay"></div>
 </section>
 </header>
-<?php if ($category2->getHas_subCat() == "yes") : ?>
+<?php if ($category2->getHas_subCat() == 1) : ?>
   <section class="content-section content_list">
 
     <?php foreach ($subCategories as $subCategory) : ?>
@@ -30,11 +30,9 @@
   </section>
 <?php else : ?>
   <section class="content-section content_list">
-
     <div class="container subCategory__container">
       <div class="row no-gutters">
         <?php foreach ($products as $product) : ?>
-
           <div class=" list_product__picture _bo col-lg-6">
             <a href="<?= $router->generate('main-product', ['id' => $product->getId()]); ?>">
               <img class="image _bp" src="<?= $assetsBaseUri ?>img/productos/<?= $product->getImage() ?>" />

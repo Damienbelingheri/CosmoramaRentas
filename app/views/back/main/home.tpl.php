@@ -56,7 +56,7 @@
                                             </button>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="<?=  $router->generate('admin-product-delete', ['id' => $product->getId()]);
-                                                                                ?>">Si, quiero borrar</a>
+                                                                               ?>">Si, quiero borrar</a>
                                                 <a class="dropdown-item" href="#" data-toggle="dropdown">Oups !</a>
                                             </div>
                                         </div>

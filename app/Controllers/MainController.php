@@ -28,6 +28,8 @@ class MainController extends CoreController {
 
         if (isset($_POST)) {
 
+    
+
             $reply_name = strip_tags(filter_input(INPUT_POST, 'name'));
 
             $replyto= strip_tags(filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL));
@@ -81,6 +83,9 @@ class MainController extends CoreController {
             //send the message, check for errors
             if (!$mail->send()) {
                 echo "Mailer Error: " . $mail->ErrorInfo;
+                $_SESSION['mailSent'] = "Tu correo ha sido enviado, te contactaremos lo más pronto posible ";
+               
+                $this->redirectToRoute("main-home");
                 // $this->redirectToRoute("main-home");
             } else {
                 $_SESSION['mailSent'] = "Tu correo ha sido enviado, te contactaremos lo más pronto posible ";

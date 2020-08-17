@@ -39,20 +39,16 @@
 
 <div class="container-fluid">
   <div class="row">
-
     <div class="col-sm-8 product__video">
-
       <div class="video-responsive">
         <iframe width="560" height="315" src="<?= $product->getVideo() ?>" frameborder="10" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
-
     <div class="col-sm-4 right">
       <h2>INCLUYE</h2>
      <?= $product->getInclude() ?>
     </div>
   </div>
-  
   <div class="row">
     <div class="col-sm left">
       <h2>DESCRIPTION</h2>
