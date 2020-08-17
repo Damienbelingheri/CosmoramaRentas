@@ -5,7 +5,7 @@
     <div class="overlay"></div>
 </section>
 </header>
-<?php if ($category2->getHas_subCat() == "yes") : ?>
+<?php if ($category2->getHas_subCat() == 1) : ?>
   <section class="content-section content_list">
 
     <?php foreach ($subCategories as $subCategory) : ?>

@@ -62,11 +62,8 @@ public static function findAll()
 
         $pdo = Database::getPDO();
 
-        
-
         $sql = "SELECT MAX(id) AS max_id FROM $tableName ";
-        
-       
+               
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 

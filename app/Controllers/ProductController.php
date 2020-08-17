@@ -162,7 +162,9 @@ class ProductController extends CoreController
         $errorList = [];
         $messages = [];
         $validator = [];
+       
         if (!empty($_POST['update'])) {
+            dump($_POST);
             //récupère les données du form
             //le strip_tags vire les éventuelles balises HTML des données 
             //ça nous protège des attaques XSS
@@ -203,7 +205,7 @@ class ProductController extends CoreController
             $product->setSlug($slug);
 
 
-            
+            dump($product);            
 
             //VALIDATION
             //FROM RESPECT/VALIDATION
@@ -287,8 +289,7 @@ class ProductController extends CoreController
         $product->setId($id);
 
         if ($product->delete($id)) {
-
-
+            
             //ajoute un message qui s'affichera sur la prochaine page ! 
             //pour l'affichage, voir dans header.tpl.php
 
