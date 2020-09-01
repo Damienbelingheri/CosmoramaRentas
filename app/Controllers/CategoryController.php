@@ -16,6 +16,7 @@ class CategoryController extends CoreController
         $category = Category::find($id);
         $subCategories = SubCategory::findSubCategoriesByCategory($id);
         $products = Product::findProductsByCategory($id);
+
         
         $this->show('front/category/list',[
             'category2' => $category,

@@ -22,7 +22,7 @@ class SubCategory extends CoreModel {
      */
     public static function findSubCategoriesByCategory($id)
     {  
-        $sql = "SELECT subcategory.id, subcategory.subtitle, subcategory.name, category.name AS category_name 
+        $sql = "SELECT subcategory.img, subcategory.id, subcategory.subtitle, subcategory.name, category.name AS category_name 
         FROM subcategory 
         JOIN category ON subcategory.category_id = category.id
         WHERE subcategory.category_id = $id
@@ -40,19 +40,25 @@ class SubCategory extends CoreModel {
     
 
 
+     /**
+     * @var int
+     */
     public $id;
+    
     /**
      * @var string
      */
     public $name;
+
     /**
      * @var string
      */
+    
     public $subtitle;
     /**
      * @var string
      */
-   
+    public $img;
     
     /**
      * Get the value of name
@@ -90,4 +96,28 @@ class SubCategory extends CoreModel {
         $this->subtitle = $subtitle;
     }
 
+
+    /**
+     * Get the value of img
+     *
+     * @return  string
+     */ 
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    /**
+     * Set the value of img
+     *
+     * @param  string  $img
+     *
+     * @return  self
+     */ 
+    public function setImg(string $img)
+    {
+        $this->img = $img;
+
+        return $this;
+    }
 }

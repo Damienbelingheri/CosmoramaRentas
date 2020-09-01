@@ -21,8 +21,10 @@ class ProductController extends CoreController
     {
         $product = Product::find($id);
         $pictures = Product::findAllPicturesByProduct($id);
+        $productCat= Product::findCategoryOfProduct($id);
+        
 
-        $this->show('front/product/detail', ['product' => $product, "pictures" => $pictures]);
+        $this->show('front/product/detail', ['product' => $product, "pictures" => $pictures,"productCat" => $productCat]);
     }
 
     /******************************BackOffice**********************************************/
@@ -92,7 +94,6 @@ class ProductController extends CoreController
                 ->attribute('subCategory_id', v::number()->between(0, $maxSubCategory))
                 ->attribute('slug', v::slug());
             try {
-
                 $userValidator->assert($product);
             } catch (NestedValidationException $ex) {
 
@@ -164,7 +165,6 @@ class ProductController extends CoreController
         $validator = [];
        
         if (!empty($_POST['update'])) {
-            dump($_POST);
             //récupère les données du form
             //le strip_tags vire les éventuelles balises HTML des données 
             //ça nous protège des attaques XSS
@@ -205,7 +205,6 @@ class ProductController extends CoreController
             $product->setSlug($slug);
 
 
-            dump($product);            
 
             //VALIDATION
             //FROM RESPECT/VALIDATION

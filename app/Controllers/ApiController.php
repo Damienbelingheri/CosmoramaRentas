@@ -2,12 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\Category;
-use App\Models\Product;
 use App\Models\SubCategory;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
 
 
 
@@ -24,6 +19,7 @@ class ApiController extends CoreController
     {
 
         $data = SubCategory::findAll();
+        dd($data);
         header('Content-Type: application/json');
         $myJson = json_encode($data);
         echo $myJson;

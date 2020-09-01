@@ -1,0 +1,19 @@
+@charset "UTF-8";
+body{background: #ffffff;width:100%;font-family:'Nunito', sans-serif;margin:0px;padding:0px;}
+
+.titleFicha{ width:15%; text-align: center; padding-top:5px; padding-bottom: 5px;color:pink; border:solid; border-color:pink; margin: auto; margin-top: 3rem;}
+.FotoInfo{ width:80%; text-align: center; margin: auto;margin-top:3rem; }
+.FotoProducto{ width:59%;display:inline-block;vertical-align: top; text-align:left;}
+.TxtInlcuye{ width:39%;display: inline-block; border: solid;border-color:pink;vertical-align: top;}
+.Caracteristicas{ width:80%; margin: auto; text-align:center; }
+.TxtCaracteristicas{ border: solid;border-color:pink; padding: 25px 0px;}
+
+
+@media screen and (max-width: 900px) {
+	.titleFicha{ width:50%;}
+	.FotoInfo{ width:100%;  }
+	.FotoProducto{ width:100%; text-align: center; }
+	.TxtInlcuye{ width:90%; font-size:.8rem;}
+	.Caracteristicas{ width:90%;font-size:.8rem; }
+
+}

@@ -26,7 +26,8 @@
     <section class="contact__items">
         <div>
            <p><i class="fas fa-paper-plane"></i></p>
-           <p>CosmoramaRentas@gmail.com</p>
+               <a class="info" class href="mailto:CosmoramaRentas@gmail.com">CosmoramaRentas
+               @ gmail.com</a>
         </div>
         <div id="">
            <p><i class="fas fa-search-location"></i></p> 
@@ -39,10 +40,10 @@
         </div>
         <div>
            <p><i class="fas fa-mobile-alt"></i></p> 
-           <p>5540787575
+           <a class="info" href="tel:+525540787575">+525540787575</a>
+          
                <br>
-               55168723173
-           </p>
+               <a class="info" href="tel:+5255168723173">+5255168723173</a>
         </div>
 
 

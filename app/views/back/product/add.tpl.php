@@ -14,7 +14,7 @@
     <?php endforeach ?>
 <?php endif; ?>
 
-<form action="" method="POST" enctype='multipart/form-data' class="mt-5 form">
+<form action='' method="POST" enctype='multipart/form-data' class="mt-5 form">
     <div class="form-group">
         <label for="name">Nombre del producto</label>
         <input name="name" type="text" class="form-control" id="name" placeholder="Nom du produit">

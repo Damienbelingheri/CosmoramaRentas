@@ -7,27 +7,17 @@
 
 
  
-@font-face {
-    font-family: Myriad;
-    src: url("../POLICE/Myriad/MYRIADPRO-REGULAR.OTF") format("opentype");
+ @font-face {
+  font-family: Myriad;
+  src: url("../POLICE/Myriad/MYRIADPRO-REGULAR.OTF") format("opentype");
 }
 
 @font-face {
-    font-family: Uomo;
-    src: url("../POLICE/UoMoFont/UomoCondensedRegular.otf") format("opentype");
+  font-family: Uomo;
+  src: url("../POLICE/UoMoFont/UomoCondensedRegular.otf") format("opentype");
 } 
 
 
- body
-{
-   width: 100%;
-   height: 100%;
-   margin: auto;
-  
-   font-family: 'Myriad', monospace;
-   color: #333333;
- }
- 
  html{
   background-color: #E0D7C6;
  }
@@ -42,19 +32,7 @@ align-items: center;
    padding: 1.25rem 2.5rem;
  }
  
- .content-section {
-   padding-top: 0;
-   padding-bottom: 0;
- }
  
- .content-section-heading h2 {
-   font-size: 3rem;
- }
- 
- .content-section-heading h3 {
-   font-size: 1rem;
-   text-transform: uppercase;
- }
  
  
  h1,
@@ -265,7 +243,6 @@ align-items: center;
  @media (min-width: 992px) {
    .portfolio-item {
      max-width: none;
- 
      margin: 0;
    }
  
@@ -304,33 +281,3 @@ align-items: center;
    }
  }
  
- footer.footer {
-   padding-top: 5rem;
-   padding-bottom:5rem;
-   background: #E0D7C6;
-   border-top-width: 1px;
-   border-top-style: solid;
- }
- 
- footer.footer .social-link {
-   display: block;
-   height: 4rem;
-   width: 4rem;
-   line-height: 4.3rem;
-   font-size: 1.5rem;
-   background-color: #E0D7C6;
-   transition: background-color 0.15s ease-in-out;
-   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.01);
- }
- 
- 
- footer.footer .social-link:hover {
-  color: #333333;
-   text-decoration: none;
- }
- 
- a:hover,
- a:focu,
- a:active {
-   color: #E0D7C6;
- }

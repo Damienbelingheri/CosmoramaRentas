@@ -1,25 +1,43 @@
+
+ 
+ @font-face {
+    font-family: Myriad;
+    src: url("../POLICE/Myriad/MYRIADPRO-REGULAR.OTF") format("opentype");
+  }
+  
+  @font-face {
+    font-family: Uomo;
+    src: url("../POLICE/UoMoFont/UomoCondensedRegular.otf") format("opentype");
+  } 
+  
+
 body {
     width: 100%;
 
     margin: auto;
 
-    font-family: 'Myriad', monospace;
+    font-family: 'Uomo', monospace !important;
+    background: #ffffff;
     color: #333333;
-    background-color: #EAEAEA;
     display: flex;
     flex-direction: column;
-
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
 }
 
 .navbar {
-    background-color: #ff6712;
+    position: relative;
+    background-color: #313131;
     justify-content: center;
     font-size: x-large;
     height: auto;
+    padding: 0;
 }
 
 .nav-item {
     text-transform: capitalize;
+    margin-left: 10px;
 }
 
 .fixed-top {
@@ -48,6 +66,16 @@ body {
     margin: auto;
 }
 
+
+.nav-link {
+    font-variant-caps: all-small-caps;
+    color: #A9A9A9 !important;
+}
+
+.nav-link:hover {
+    color: #FFE150 !important;
+}
+
 #inputNombre {
     border: 3px solid #ffED4D;
 }
@@ -72,6 +100,15 @@ body {
     width: 33%;
 }
 
+.info{
+    color: #333333;
+}
+
+
+.info:hover{
+    text-decoration: none;
+    color: #EDCE3A;
+}
 /* !Modal */
 
 
@@ -79,14 +116,16 @@ body {
 
 
 .subCategory__title {
-    font-size: 3.5rem;
-    margin-bottom: 3.2rem;
+    font-size: 3rem;
+    margin-bottom: 0;
     text-align: center;
-}
+    margin-top: 3.2rem;
+    margin-bottom: 2rem;
+    font-family: 'Bungee Outline', cursive !important;
+    color: rgb(17, 17, 17);
+    text-decoration: underline 10px;
 
-.content_list {
-    background: #EAEAEA;
-    padding-top: 3rem;
+
 }
 
 .name__camera {
@@ -102,7 +141,7 @@ body {
 
 .list_product__picture .image {
     display: inline;
-    width: 100%; 
+    width: 100%;
     padding: 0rem 1rem;
 
 }
@@ -111,8 +150,8 @@ body {
 
 
 .product__title {
-    margin: 3rem ;
-    display : inline-block;
+    margin: 3rem;
+    display: inline-block;
     padding-bottom: 1rem;
 }
 
@@ -151,14 +190,15 @@ body {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     padding: 3.5rem 0.8rem;
-   
+
 
 }
 
 .left ul,
 .right ul {
-
-list-style : none;
+    padding-left: 0px;
+    list-style: none;
+    font-style: normal;
 }
 
 .left h2,
@@ -192,25 +232,11 @@ footer.footer {
     margin-top: 15px;
 }
 
-
-.desc_inclu {
-    display: flex;
-}
-
-.desc,
-.incl {
-
-    display: flex;
-    flex-direction: column;
-}
-
-
 label {
 
     text-align: center;
     font-size: x-large;
 }
-
 
 .images {
     display: flex;
@@ -321,7 +347,7 @@ label {
 }
 
 .carousel-item img {
-    object-fit: cover;
+    object-fit: contain !important;
 }
 
 #carousel-thumbs {
@@ -351,7 +377,7 @@ label {
 }
 
 @media (min-width: 1500px) {
-    body{
+    body {
         width: 90%;
     }
 }
@@ -372,4 +398,214 @@ label {
     .carousel-container #carousel-thumbs {
         background: #ccccce;
     }
+}
+
+
+
+.BannerPrincipal {
+    margin-bottom: -6px;
+}
+
+.BannerFijo {
+    width: 60%;
+    display: inline-block;
+}
+
+.BannerNoFijo {
+    width: 39%;
+    display: inline-block;
+    clear: both;
+}
+
+.TitleProductos {
+    width: 100%;
+    background: #389DF5;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 4rem;
+    clear: both;
+}
+
+.Galery {
+    width: 80%;
+    margin: auto;
+    margin-top: 3rem;
+}
+
+.Galery2 {
+    width: 80%;
+    margin: auto;
+}
+
+.Photo1 {
+    width: 32%;
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+}
+
+.Blur:hover {
+    filter: blur(3px);
+}
+
+#TextFilmemos {
+    text-align: center;
+    font-size: 25px;
+    margin-top: 15px;
+}
+
+footer {
+    background: #313131;
+    text-align: center;
+    font-size: 15px;
+    margin-top: 1.5rem;
+    padding: 9px;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: 900px) {
+    .TitleProductos {
+        font-size: 3rem;
+    }
+
+    .Photo1 {
+        width: 100%;
+    }
+
+}
+
+
+
+/* catalog */
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.tituloCatalogo {
+    width: 100%;
+    text-align:
+        center;
+    padding-top: 35px;
+    font-size: 4rem;
+}
+
+.GaleriaCatologo {
+    width: 80%;
+    margin: auto;
+}
+
+.FotoCatalogo1 {
+    width: 49%;
+    display: inline-block;
+    margin-top: 3rem;
+}
+
+@media screen and (max-width: 900px) {
+    .FotoCatalogo1 {
+        width: 100%;
+    }
+
+}
+
+.titleFicha {
+    font-size: 3rem;
+    width: 20rem;
+    text-align: center;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    border: solid;
+    margin: auto;
+    margin-top: 3rem;
+}
+
+.FotoInfo {
+    width: 80%;
+    text-align: center;
+    margin: auto;
+    margin-top: 3rem;
+}
+
+.FotoProducto {
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+}
+
+.TxtInlcuye {
+    border: solid;
+    border-color: pink;
+    vertical-align: top;
+    margin-top: 2rem;
+}
+
+.Caracteristicas {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.TxtCaracteristicas {
+    border: solid;
+    border-color: pink;
+    padding: 25px 0px;
+}
+
+.TxtInlcuye ul {
+    padding-left: 0px;
+
+}
+
+/* @media screen and (max-width: 900px) {
+	.titleFicha{ width:50%;}
+	.FotoInfo{ width:100%;  }
+	.FotoProducto{ width:100%; text-align: center; }
+	.TxtInlcuye{ widows: 100px;%; font-size:.8rem;}
+	.Caracteristicas{ width:90%;font-size:.8rem; }
+
+} */
+
+#detail_include {
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+
+#detail_desc {
+    text-decoration: underline;
+    font-weight: 700;
+}
+/* Colors categories */
+.Càmaras{
+    color: #F34170;
+    border-color: #F34170
+}
+
+.Optica{
+    color: #F99621;
+    border-color: #F99621
+
+}
+
+.Audio{
+color: #14B7FF;
+border-color: #14B7FF
+
+}
+
+.Iluminación{
+    color: #EDCE3A;
+    border-color: #EDCE3A;
+}
+
+.Soporte{
+    color: #90DD17;
+    border-color: #90DD17;
+}
+
+.Accesorios{
+    color: #FF4040;
+    border-color: #FF4040;
 }
