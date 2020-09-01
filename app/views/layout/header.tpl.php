@@ -18,10 +18,10 @@
   <!-- Custom Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
   <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Outline&display=swap" rel="stylesheet"> 
     <!-- Custom CSS -->
   <link href="<?= $assetsBaseUri ?>css/stylish-portfolio.css" rel="stylesheet">
   <link href="<?= $assetsBaseUri ?>css/style.css" rel="stylesheet">
-  <link href="<?= $assetsBaseUri ?>css/footer.css" rel="stylesheet">
   <link href="<?= $assetsBaseUri ?>node_modules/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 
 

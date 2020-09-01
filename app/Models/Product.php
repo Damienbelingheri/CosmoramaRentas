@@ -96,6 +96,31 @@ class Product extends CoreModel {
     
 
     /**
+     * Find all Products of one category
+     *
+     * @param int $id
+     * @return void
+     */
+    public static function findCategoryOfProduct($id)
+    {  
+        $sql = "SELECT product.* ,category.name AS category_name 
+        FROM product 
+        JOIN category ON product.category_id = category.id
+        WHERE product.id = $id
+        ORDER BY product.name ASC  
+        /* LIMIT 12 */";
+        //récupère pdo
+        $pdo = Database::getPDO();
+        //exécute la requête
+        $stmt = $pdo->query($sql);
+        //récupérer le résultat
+        $product = $stmt->fetchObject(static::class);
+        //renvoye le résultat à celui qui nous a appelé
+        return $product;
+    }
+    
+
+    /**
      * Find all the picture of one product
      *
      * @param int $id

@@ -6,7 +6,7 @@ let app = {
     fetchOptions: {
         method: 'GET',
         mode: 'cors',
-        cache: 'no-cache'
+        cache: 'no-cache',
     },
 
     //par défaut c'est un tableau vide, mais quand la requête ajax sera terminée

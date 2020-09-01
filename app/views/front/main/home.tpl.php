@@ -6,48 +6,21 @@
     ?> </div> -->
 <?php endif; ?>
    <!-- Logo principale -->
-   <section class="masthead d-flex cont__logo">
-     <img id="logo" src="<?= $assetsBaseUri ?>/img/logo/LOGO-PRINCIPAL.png" alt="" >
-   </section>
+  
+   <section class="BannerPrincipal" colspan="3;">
+	<div class="BannerFijo"> <img src=".<?= $assetsBaseUri ?>/img/logo/CamaraPrincipal-06.png" width="100%" alt=""/></div>
+	<div class="BannerNoFijo"><img src="<?= $assetsBaseUri ?>/img/logo/BannerNoFijo-06.png" width="100%" alt=""/></div>
+</section>
 
 
    </header>
+
+   <section> 
+	<div class="TitleProductos"> Nuestros Productos</div>
+</section>
    <div class="container my-4">
-
-
-
-
-   <!-- Promotions -->
-
-   <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
-     <div class="carousel-inner">
-       <div class="carousel-item active">
-         <img class="d-block w-100" src="<?= $assetsBaseUri ?>img/banners/BANNER.png" alt="First slide">
-       </div>
-       <div class="carousel-item">
-         <img class="d-block w-100" src="<?= $assetsBaseUri ?>img/banners/BANNER.png" alt="Second slide">
-       </div>
-       <div class="carousel-item">
-         <img class="d-block w-100" src="<?= $assetsBaseUri ?>img/banners/BANNER.png" alt="Third slide">
-       </div>
-     </div>
-     <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-       <span class="sr-only">Previous</span>
-     </a>
-     <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-       <span class="carousel-control-next-icon" aria-hidden="true"></span>
-       <span class="sr-only">Next</span>
-     </a>
-   </div>
-
-
-
-
-
-
-
    <!-- Categories -->
+  
    <section class="row no-gutters">
      <!--  TODO Ajouter un lien qui renvoie a la cat séléctionné  -->
 
@@ -63,6 +36,9 @@
          </a>
        </div>
      <?php endforeach; ?>
+    
    </section>
 
  </div>
+ 
+ <h2 id="TextFilmemos"> ¡Filmemos Pues! </h2>	

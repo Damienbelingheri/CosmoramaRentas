@@ -1,0 +1,20 @@
+@charset "UTF-8";
+body{background: #ffffff;width:100%;font-family:'Nunito', sans-serif;margin:0px;padding:0px;}
+.BannerPrincipal{margin-bottom:-6px;}
+.BannerFijo{width:60%;display: inline-block;}
+.BannerNoFijo{ width:39%;display: inline-block;clear: both;}
+.TitleProductos{width:100%; background: #389DF5; text-align: center;color: #FFFFFF; font-size: 4rem;clear: both; }
+.Galery{ width:80%;margin:auto; margin-top: 3rem;}
+.Galery2{width:80%;margin:auto; }
+.Photo1{width:32%; display: inline-block;padding:0px;margin:0px;}
+.Blur:hover {filter: blur(3px);}
+#TextFilmemos{ text-align: center;font-size:25px;margin-top: 15px;}
+footer{background: #313131;text-align: center; font-size:15px;margin-top:1.5rem; padding:9px; color:#FFFFFF;}
+
+@media screen and (max-width: 900px) {
+	.TitleProductos{font-size: 3rem;}
+	.Photo1{width:100%;}
+
+}
+
+
