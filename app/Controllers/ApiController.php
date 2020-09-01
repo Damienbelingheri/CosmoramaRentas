@@ -19,7 +19,7 @@ class ApiController extends CoreController
     {
 
         $data = SubCategory::findAll();
-        dd($data);
+       
         header('Content-Type: application/json');
         $myJson = json_encode($data);
         echo $myJson;
